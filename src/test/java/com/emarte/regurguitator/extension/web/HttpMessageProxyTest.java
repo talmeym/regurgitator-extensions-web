@@ -1,0 +1,131 @@
+package com.emarte.regurguitator.extension.web;
+
+import com.emarte.regurgitator.core.*;
+import com.emarte.regurgitator.extensions.web.*;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.util.*;
+
+import static com.emarte.regurgitator.core.CoreTypes.STRING;
+import static com.emarte.regurgitator.extensions.web.HttpConstants.*;
+import static junit.framework.Assert.assertEquals;
+
+public class HttpMessageProxyTest {
+	@Test
+	public void testGet() throws RegurgitatorException {
+		final CollectingHttpClientWrapper wrapper = getWrapper();
+		Message response = getToTest(wrapper).proxyMessage(buildMessage(GET));
+		assertEquals("GET[/path/path,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
+		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
+	}
+
+	@Test
+	public void testPut() throws RegurgitatorException {
+		final CollectingHttpClientWrapper wrapper = getWrapper();
+		Message response = getToTest(wrapper).proxyMessage(buildMessage(PUT));
+		assertEquals("PUT[/path/path,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
+		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
+	}
+
+	@Test
+	public void testPost() throws RegurgitatorException {
+		final CollectingHttpClientWrapper wrapper = getWrapper();
+		Message message = buildMessage(POST);
+		message.getContext(REQUEST_PAYLOAD_CONTEXT).setValue(TEXT, STRING, "request body");
+		Message response = getToTest(wrapper).proxyMessage(message);
+		assertEquals("POST[/path/path,request-body=text/plain; charset=UTF-8:request body,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
+		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
+	}
+
+	@Test
+	public void testDelete() throws RegurgitatorException {
+		final CollectingHttpClientWrapper wrapper = getWrapper();
+		Message response = getToTest(wrapper).proxyMessage(buildMessage(DELETE));
+		assertEquals("DELETE[/path/path,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
+		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
+	}
+
+	private HttpMessageProxy getToTest(final CollectingHttpClientWrapper wrapper) {
+		return new HttpMessageProxy("http://this.com", 1234) {
+			@Override
+			protected HttpClientWrapper getWrapper(String host, int port) {
+				return wrapper;
+			}
+		};
+	}
+
+	private CollectingHttpClientWrapper getWrapper() {
+		TreeMap<String, String> responseHeaders = new TreeMap<String, String>();
+		responseHeaders.put("rsh1", "rsv1");
+		responseHeaders.put("rsh2", "rsv2");
+		return new CollectingHttpClientWrapper("response body", responseHeaders, 200);
+	}
+
+	private Message buildMessage(String value) throws RegurgitatorException {
+		Message message = new Message(null);
+		message.getContext(REQUEST_METADATA_CONTEXT).setValue(METHOD, STRING, value);
+		message.getContext(REQUEST_METADATA_CONTEXT).setValue(PATH_INFO, STRING, "/path/path");
+		message.getContext(REQUEST_METADATA_CONTEXT).setValue(CONTENT_TYPE, STRING, "text/plain");
+		message.getContext(REQUEST_METADATA_CONTEXT).setValue(CHARACTER_ENCODING, STRING, "UTF-8");
+		message.getContext(REQUEST_HEADERS_CONTEXT).setValue("rqh1", STRING, "rqv1");
+		message.getContext(REQUEST_HEADERS_CONTEXT).setValue("rqh2", STRING, "rqv2");
+		return message;
+	}
+
+	private class CollectingHttpClientWrapper extends HttpClientWrapper {
+		private String responseBody;
+		private Map<String, String> responseHeaders;
+		private int statusCode;
+
+		private HttpMethod methodRequested;
+
+		public CollectingHttpClientWrapper(String responseBody, Map<String, String> responseHeaders, int statusCode) {
+			super("", -1);
+			this.responseBody = responseBody;
+			this.responseHeaders = responseHeaders;
+			this.statusCode = statusCode;
+		}
+
+		@Override
+		public HttpMethod newGetMethod() {
+			methodRequested = new MyHttpMethod("GET", responseBody, responseHeaders, statusCode);
+			return methodRequested;
+		}
+
+		@Override
+		public PostMethod newPostMethod() {
+			MyPostMethod postMethod = new MyPostMethod("POST", responseBody, responseHeaders, statusCode);
+			methodRequested = postMethod;
+			return postMethod;
+		}
+
+		@Override
+		public HttpMethod newPutMethod() {
+			methodRequested = new MyHttpMethod("PUT", responseBody, responseHeaders, statusCode);
+			return methodRequested;
+		}
+
+		@Override
+		public HttpMethod newDeleteMethod() {
+			methodRequested = new MyHttpMethod("DELETE", responseBody, responseHeaders, statusCode);
+			return methodRequested;
+		}
+
+		@Override
+		public int executeMethod(HttpMethod method) throws IOException {
+			if(method != methodRequested) {
+				throw new IllegalArgumentException("wrong method");
+			}
+
+			return method.execute(null, null);
+		}
+
+		@Override
+		public String toString() {
+			return methodRequested.toString();
+		}
+	}
+}
