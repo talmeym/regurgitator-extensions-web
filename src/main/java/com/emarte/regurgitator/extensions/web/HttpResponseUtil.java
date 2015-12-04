@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import static com.emarte.regurgitator.extensions.web.HttpConstants.*;
 
 public class HttpResponseUtil {
-	private static Log log = Log.getLog(HttpResponseUtil.class);
+	private static final Log log = Log.getLog(HttpResponseUtil.class);
 
 	public static void applyResponseData(Message message, HttpServletResponse httpServletResponse) {
 		addResponseHeaders(message, httpServletResponse);

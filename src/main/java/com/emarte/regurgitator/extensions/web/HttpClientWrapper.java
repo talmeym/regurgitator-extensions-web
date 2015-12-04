@@ -7,7 +7,8 @@ import org.apache.commons.httpclient.methods.*;
 import java.io.IOException;
 
 public class HttpClientWrapper {
-	private static Log log = Log.getLog(HttpClientWrapper.class);
+	private static final Log log = Log.getLog(HttpClientWrapper.class);
+
 	private HttpClient httpClient;
 
 	public HttpClientWrapper(String host, int port) {

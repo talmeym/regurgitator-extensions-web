@@ -5,7 +5,6 @@ import com.emarte.regurgitator.core.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.util.Map;
 
 import static com.emarte.regurgitator.core.StringType.stringify;
 import static com.emarte.regurgitator.extensions.web.HttpGlobalUtil.applyGlobalData;
@@ -13,7 +12,7 @@ import static com.emarte.regurgitator.extensions.web.HttpRequestUtil.applyReques
 import static com.emarte.regurgitator.extensions.web.HttpResponseUtil.applyResponseData;
 
 public class RegurgitatorServlet extends HttpServlet {
-    private static Log log = Log.getLog(RegurgitatorServlet.class);
+    private static final Log log = Log.getLog(RegurgitatorServlet.class);
 
     private Regurgitator regurgitator;
 

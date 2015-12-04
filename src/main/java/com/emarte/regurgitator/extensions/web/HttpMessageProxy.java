@@ -12,7 +12,7 @@ import static com.emarte.regurgitator.extensions.web.HttpConstants.*;
 import static java.lang.String.valueOf;
 
 public class HttpMessageProxy {
-    private static Log log = Log.getLog(HttpMessageProxy.class);
+    private static final Log log = Log.getLog(HttpMessageProxy.class);
 
 	private HttpClientWrapper clientWrapper;
 
