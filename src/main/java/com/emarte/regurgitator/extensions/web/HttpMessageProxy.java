@@ -35,7 +35,7 @@ public class HttpMessageProxy {
 			log.debug("Executing method");
             int status = clientWrapper.executeMethod(method);
 			log.debug("Creating new message");
-            Message newMessage = createNewMessage(message);
+			Message newMessage = new Message(message, true);
             setStatusCode(status, newMessage);
             setPayload(method, newMessage);
             addHeaders(method, newMessage);
@@ -102,11 +102,6 @@ public class HttpMessageProxy {
             method.addRequestHeader(stringify(id), value);
         }
     }
-
-	private static Message createNewMessage(Message message) {
-		ResponseCallBack callback = message.getResponseCallback();
-		return message.hasSession() ? new Message(callback, message.getSession().getId()) : new Message(callback);
-	}
 
 	private static void setStatusCode(int status, Message message) throws RegurgitatorException {
 		log.debug("Setting response status code to '" + status + "'");
