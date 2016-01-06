@@ -2,12 +2,12 @@ package com.emarte.regurgitator.extensions.web;
 
 import com.emarte.regurgitator.core.*;
 
-public class HttpCallThrough extends Identifiable implements Step {
+public class HttpCall extends Identifiable implements Step {
     private final Log log = Log.getLog(this);
     private final HttpMessageProxy messageProxy;
 	private final Step responseProcessing;
 
-    public HttpCallThrough(Object id, HttpMessageProxy httpMessageProxy, Step responseProcessing) {
+    public HttpCall(Object id, HttpMessageProxy httpMessageProxy, Step responseProcessing) {
         super(id);
         messageProxy = httpMessageProxy;
 		this.responseProcessing = responseProcessing;
