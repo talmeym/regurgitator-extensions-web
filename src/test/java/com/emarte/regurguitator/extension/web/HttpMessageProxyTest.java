@@ -49,9 +49,9 @@ public class HttpMessageProxyTest {
 	}
 
 	private HttpMessageProxy getToTest(final CollectingHttpClientWrapper wrapper) {
-		return new HttpMessageProxy("http://this.com", 1234) {
+		return new HttpMessageProxy("http://this.com", 1234, "username", "password") {
 			@Override
-			protected HttpClientWrapper getWrapper(String host, int port) {
+			protected HttpClientWrapper getWrapper(String host, int port, String username, String password) {
 				return wrapper;
 			}
 		};
@@ -83,7 +83,7 @@ public class HttpMessageProxyTest {
 		private HttpMethod methodRequested;
 
 		public CollectingHttpClientWrapper(String responseBody, Map<String, String> responseHeaders, int statusCode) {
-			super("", -1);
+			super("", -1, null, null);
 			this.responseBody = responseBody;
 			this.responseHeaders = responseHeaders;
 			this.statusCode = statusCode;

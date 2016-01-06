@@ -2,6 +2,7 @@ package com.emarte.regurgitator.extensions.web;
 
 import com.emarte.regurgitator.core.Log;
 import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.*;
 
 import java.io.IOException;
@@ -11,9 +12,14 @@ public class HttpClientWrapper {
 
 	private HttpClient httpClient;
 
-	public HttpClientWrapper(String host, int port) {
+	public HttpClientWrapper(String host, int port, String username, String password) {
 		httpClient = new HttpClient();
 		httpClient.setHostConfiguration(getHostConfiguration(host, port));
+
+		if(username != null && password != null) {
+			httpClient.getParams().setAuthenticationPreemptive(true);
+			httpClient.getState().setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username, password));
+		}
 	}
 
 	public String getHost() {

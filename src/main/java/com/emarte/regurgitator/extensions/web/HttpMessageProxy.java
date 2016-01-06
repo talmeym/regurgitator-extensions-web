@@ -16,12 +16,12 @@ public class HttpMessageProxy {
 
 	private HttpClientWrapper clientWrapper;
 
-    public HttpMessageProxy(String host, int port) {
-        clientWrapper = getWrapper(host, port);
+    public HttpMessageProxy(String host, int port, String username, String password) {
+        clientWrapper = getWrapper(host, port, username, password);
     }
 
-	protected HttpClientWrapper getWrapper(String host, int port) {
-		return new HttpClientWrapper(host, port);
+	protected HttpClientWrapper getWrapper(String host, int port, String username, String password) {
+		return new HttpClientWrapper(host, port, username, password);
 	}
 
     public Message proxyMessage(Message message) throws RegurgitatorException {
