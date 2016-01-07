@@ -26,7 +26,8 @@ public class HttpMessageProxy {
 
     public Message proxyMessage(Message message) throws RegurgitatorException {
 		long start = System.currentTimeMillis();
-		log.debug("Proxying message to '" + clientWrapper.getHost() + ":" + clientWrapper.getPort() + "'");
+		String username = clientWrapper.getUsername();
+		log.debug("Proxying message to '" + clientWrapper.getHost() + ":" + clientWrapper.getPort() + "'" + (username != null ? " with credentials for '" + username + "'": ""));
         HttpMethod method = getMethod(message);
         setPath(method, message);
         addHeaders(method, message.getContext(REQUEST_HEADERS_CONTEXT));
@@ -35,7 +36,7 @@ public class HttpMessageProxy {
 			log.debug("Executing method");
             int status = clientWrapper.executeMethod(method);
 			log.debug("Creating new message");
-			Message newMessage = new Message(message, true);
+			Message newMessage = new Message(message, true, false);
             setStatusCode(status, newMessage);
             setPayload(method, newMessage);
             addHeaders(method, newMessage);
