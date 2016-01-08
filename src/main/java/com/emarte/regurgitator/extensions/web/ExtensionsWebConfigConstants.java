@@ -1,14 +1,17 @@
 package com.emarte.regurgitator.extensions.web;
 
-public interface HttpConstants {
+public interface ExtensionsWebConfigConstants {
+	// contexts
     public static final String REQUEST_PAYLOAD_CONTEXT = "request-payload";
     public static final String REQUEST_HEADERS_CONTEXT = "request-headers";
     public static final String REQUEST_METADATA_CONTEXT = "request-metadata";
     public static final String RESPONSE_PAYLOAD_CONTEXT = "response-payload";
     public static final String RESPONSE_HEADERS_CONTEXT = "response-headers";
     public static final String RESPONSE_METADATA_CONTEXT = "response-metadata";
+    public static final String REQUEST_COOKIES_CONTEXT = "request-cookies";
 	public static final String GLOBAL_METADATA_CONTEXT = "global-metadata";
 
+	// metadata
     public static final String SERVER_NAME = "server-name";
     public static final String METHOD = "method";
     public static final String REQUEST_URI = "request-uri";
@@ -34,10 +37,12 @@ public interface HttpConstants {
     public static final String HTTP_SESSION_ID = "http-session-id";
     public static final String TEXT = "text";
     public static final String STATUS_CODE = "status-code";
-    public static final String COOKIE_CONTEXT = "request-cookies";
-    
+
     public static final String GET = "GET";
     public static final String POST = "POST";
     public static final String PUT = "PUT";
     public static final String DELETE = "DELETE";
+
+	// query-string
+	public static final String KEY = "key";
 }

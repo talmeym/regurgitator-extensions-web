@@ -8,7 +8,7 @@ import java.io.*;
 
 import static com.emarte.regurgitator.core.CoreTypes.STRING;
 import static com.emarte.regurgitator.core.StringType.stringify;
-import static com.emarte.regurgitator.extensions.web.HttpConstants.*;
+import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 import static java.lang.String.valueOf;
 
 public class HttpMessageProxy {

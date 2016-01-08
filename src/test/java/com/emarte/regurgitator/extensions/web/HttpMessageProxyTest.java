@@ -1,7 +1,6 @@
-package com.emarte.regurguitator.extension.web;
+package com.emarte.regurgitator.extensions.web;
 
 import com.emarte.regurgitator.core.*;
-import com.emarte.regurgitator.extensions.web.*;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.junit.Test;
@@ -10,7 +9,7 @@ import java.io.IOException;
 import java.util.*;
 
 import static com.emarte.regurgitator.core.CoreTypes.STRING;
-import static com.emarte.regurgitator.extensions.web.HttpConstants.*;
+import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 import static junit.framework.Assert.assertEquals;
 
 public class HttpMessageProxyTest {

@@ -1,33 +1,38 @@
-package com.emarte.regurguitator.extension.web;
+package com.emarte.regurgitator.extensions.web;
 
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.auth.AuthState;
+import org.apache.commons.httpclient.methods.*;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
 import java.io.*;
 import java.util.*;
 
 @SuppressWarnings({"deprecation"})
-public class MyHttpMethod implements HttpMethod {
+public class MyPostMethod extends PostMethod {
 	private String name;
 
-	// request
 	private String path;
-	private Map<String, String> requestHeaders = new TreeMap<String, String>();
+	private RequestEntity requestEntity;
+	private final Map<String, String> requestHeaders = new HashMap<String, String>();
 
-	// response
 	private String responseBody;
-	private Map<String, String> responseHeaders;
-	private int statusCode;
+	private final Map<String, String> responseHeaders;
+	private final int statusCode;
 	private boolean connectionReleased;
 
 	private UnsupportedOperationException exception = new UnsupportedOperationException("not implemented");
 
-	public MyHttpMethod(String name, String responseBody, Map<String, String> responseHeaders, int statusCode) {
-		this.name = name;
+	public MyPostMethod(String name, String responseBody, Map<String, String> responseHeaders, int statusCode) {
+	    this.name = name;
 		this.responseBody = responseBody;
 		this.responseHeaders = responseHeaders;
 		this.statusCode = statusCode;
+	}
+
+	@Override
+	public void setRequestEntity(RequestEntity requestEntity) {
+		this.requestEntity = requestEntity;
 	}
 
 	@Override
@@ -103,16 +108,6 @@ public class MyHttpMethod implements HttpMethod {
 	@Override
 	public void removeRequestHeader(Header header) {
 		requestHeaders.remove(header.getName());
-	}
-
-	@Override
-	public boolean getFollowRedirects() {
-		throw exception;
-	}
-
-	@Override
-	public void setFollowRedirects(boolean followRedirects) {
-		throw exception;
 	}
 
 	@Override
@@ -278,7 +273,23 @@ public class MyHttpMethod implements HttpMethod {
 
 	@Override
 	public String toString() {
+		return name + "[" + path + ",request-body=" + toStringRequestEntity() + ",request-headers=" + requestHeaders + ",response-headers=" + responseHeaders + ",connection-released=" + connectionReleased + "]";
+	}
 
-		return name + "[" + path + ",request-headers=" + requestHeaders + ",response-headers=" + responseHeaders + ",connection-released=" + connectionReleased + "]";
+	public String toStringRequestEntity() {
+		try {
+			ByteArrayOutputStream output = new ByteArrayOutputStream();
+			requestEntity.writeRequest(output);
+			String result = output.toString();
+			String contentType = requestEntity.getContentType();
+
+			if(contentType != null) {
+				result = contentType + ":" + result;
+			}
+
+			return result;
+		} catch (IOException e) {
+			return null;
+		}
 	}
 }

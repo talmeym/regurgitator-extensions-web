@@ -4,7 +4,7 @@ import com.emarte.regurgitator.core.*;
 
 import javax.servlet.http.HttpServletResponse;
 
-import static com.emarte.regurgitator.extensions.web.HttpConstants.*;
+import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 public class HttpResponseUtil {
 	private static final Log log = Log.getLog(HttpResponseUtil.class);

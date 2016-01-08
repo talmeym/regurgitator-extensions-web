@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.Enumeration;
 
 import static com.emarte.regurgitator.core.CoreTypes.*;
-import static com.emarte.regurgitator.extensions.web.HttpConstants.*;
+import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 public class HttpRequestUtil {
     private static final Log log = Log.getLog(HttpRequestUtil.class);
@@ -72,7 +72,7 @@ public class HttpRequestUtil {
             for(Cookie cookie: cookies) {
                 String name = cookie.getName();
                 String value = cookie.getValue();
-                addStringParam(message, COOKIE_CONTEXT, name, value);
+                addStringParam(message, REQUEST_COOKIES_CONTEXT, name, value);
             }
         }
     }
