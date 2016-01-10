@@ -36,7 +36,7 @@ public class HttpMessageProxy {
 			log.debug("Executing method");
             int status = clientWrapper.executeMethod(method);
 			log.debug("Creating new message");
-			Message newMessage = new Message(message, true, false);
+			Message newMessage = new Message(message, true, true);
             setStatusCode(status, newMessage);
             setPayload(method, newMessage);
             addHeaders(method, newMessage);
