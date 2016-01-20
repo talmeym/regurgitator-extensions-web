@@ -19,8 +19,10 @@ public class RegurgitatorServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init();
+
         try {
-            regurgitator = new Regurgitator("regurgitator", ConfigurationFile.loadFile(config.getInitParameter("config-location")));
+			String id = config.getInitParameter("regurgitator-id");
+			regurgitator = new Regurgitator(id == null ? "regurgitator" : id, ConfigurationFile.loadFile(config.getInitParameter("config-location")));
         } catch (RegurgitatorException e) {
             throw new ServletException(e);
         }
@@ -31,14 +33,16 @@ public class RegurgitatorServlet extends HttpServlet {
 		long start = System.currentTimeMillis();
 
 		try {
-            log.debug("Accepting new HTTP request");
+            log.debug("Accepting new http request");
 
             ResponseCallBack responseCallBack = new ResponseCallBack() {
                 @Override
                 public void respond(Message message, Object value) {
-                    applyResponseData(message, response);
+					log.debug("Processing callback");
+					log.debug("Applying message data to http response");
+					applyResponseData(message, response);
 
-                    log.debug("Writing back response data");
+                    log.debug("Writing back response payload");
 					try {
             			ServletOutputStream outputStream = response.getOutputStream();
 						outputStream.write(stringify(value).getBytes());
@@ -52,13 +56,15 @@ public class RegurgitatorServlet extends HttpServlet {
 							// I tried
 						}
 					}
+
+					log.debug("Callback processing complete");
                 }
             };
 
-            log.debug("Creating new regurgitator message");
+            log.debug("Creating new message");
             Message message = new Message(responseCallBack);
 
-            log.debug("Applying request details to message");
+            log.debug("Applying http request details to message");
             applyRequestData(message, request);
 
             log.debug("Applying global details to message");
@@ -73,6 +79,6 @@ public class RegurgitatorServlet extends HttpServlet {
         }
 
 		long end = System.currentTimeMillis();
-		log.debug("All done: " + (end - start) + " milliseconds");
+		log.debug("*** All done: " + (end - start) + " milliseconds ***");
     }
 }

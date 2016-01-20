@@ -21,7 +21,7 @@ public class HttpRequestUtil {
     }
 
     private static void addRequestMetadata(Message message, HttpServletRequest request) throws RegurgitatorException {
-        log.debug("Adding request metadata to message");
+        log.debug("Adding metadata to message from http request");
         addStringParam(message, REQUEST_METADATA_CONTEXT, METHOD, request.getMethod());
         addStringParam(message, REQUEST_METADATA_CONTEXT, REQUEST_URI, request.getRequestURI());
         addStringParam(message, REQUEST_METADATA_CONTEXT, QUERY_STRING, request.getQueryString());
@@ -48,12 +48,12 @@ public class HttpRequestUtil {
     }
 
     private static void addPayload(Message message, HttpServletRequest request) throws IOException, RegurgitatorException {
-        log.debug("Adding http payload to message");
+        log.debug("Adding payload to message from http request");
         addStringParam(message, REQUEST_PAYLOAD_CONTEXT, TEXT, getPayload(request));
     }
 
     private static void addRequestHeaders(Message message, HttpServletRequest request) throws RegurgitatorException {
-        log.debug("Adding request headers to message");
+        log.debug("Adding headers to message from http request");
         Enumeration<String> headerNames = request.getHeaderNames();
 
         while(headerNames.hasMoreElements()) {
@@ -67,7 +67,7 @@ public class HttpRequestUtil {
         Cookie[] cookies = request.getCookies();
 
         if(cookies != null) {
-            log.debug("Adding request cookies to message");
+            log.debug("Adding cookies to message from http request");
 
             for(Cookie cookie: cookies) {
                 String name = cookie.getName();

@@ -7,6 +7,7 @@ import static com.emarte.regurgitator.core.CoreTypes.STRING;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 public class CreateHttpResponse extends Identifiable implements Step {
+	private final Log log = Log.getLog(this);
 	private final CreateResponse response;
 	private final long statusCode;
 	private final String contentType;
@@ -30,6 +31,6 @@ public class CreateHttpResponse extends Identifiable implements Step {
 			responseMetadata.setValue(CONTENT_TYPE, STRING, contentType);
 		}
 
-		response.execute(message);
+		response.execute(message, log);
 	}
 }

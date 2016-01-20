@@ -15,18 +15,18 @@ public class HttpResponseUtil {
 	}
 
 	private static void addResponseHeaders(Message message, HttpServletResponse response) {
-		log.debug("Adding http response headers");
+		log.debug("Adding headers to http response from message");
 		Parameters context = message.getContext(RESPONSE_HEADERS_CONTEXT);
 
 		for(Object id : context.ids()) {
 			Object value = context.getValue(id);
-			log.debug("Setting http response header '" + id + "' to value '" + value + "'");
+			log.debug("Setting header '" + id + "' to value '" + value + "'");
 			response.addHeader(String.valueOf(id), value.toString());
 		}
 	}
 
 	private static void addResponseMetadata(Message message, HttpServletResponse httpServletResponse) {
-		log.debug("Adding http response metadata");
+		log.debug("Adding metadata to http response from message");
 		Parameters context = message.getContext(RESPONSE_METADATA_CONTEXT);
 
 		if(context.contains(STATUS_CODE)) {
