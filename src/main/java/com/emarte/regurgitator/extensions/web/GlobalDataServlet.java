@@ -22,7 +22,7 @@ public class GlobalDataServlet extends HttpServlet {
 			try {
 				Properties properties = new Properties();
 				properties.load(getInputStreamForFile(propertiesLocation));
-				HttpGlobalUtil.addGlobalParametersFromProperties(propertiesLocation, properties);
+				addGlobalParametersFromProperties(propertiesLocation, properties);
 			} catch (Exception e) {
 				throw new ServletException(e);
 			}
