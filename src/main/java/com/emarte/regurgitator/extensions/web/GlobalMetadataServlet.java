@@ -56,10 +56,14 @@ public class GlobalMetadataServlet extends HttpServlet {
 		Parameter parameter = getGlobalParameter(name);
 
 		if(parameter != null) {
-			sendMessage(parameterString(parameter), 200, resp);
+			sendMessage(parameterString(parameter), resp);
 		}
 
 		sendMessage("parameter not found", 400, resp);
+	}
+
+	private void sendMessage(String message, HttpServletResponse resp) throws IOException {
+		sendMessage(message, 200, resp);
 	}
 
 	private void sendMessage(String message, int statusCode, HttpServletResponse resp) throws IOException {
@@ -83,7 +87,7 @@ public class GlobalMetadataServlet extends HttpServlet {
 		try {
 			ParameterType parameterType = type != null ? parameterType(type) : CoreTypes.STRING;
 			setGlobalParameter(name, parameterType, value);
-			sendMessage("parameter set", 200, resp);
+			sendMessage("parameter set", resp);
 		} catch (RegurgitatorException e) {
 			sendMessage("parameter type not found", 400, resp);
 		}
@@ -97,13 +101,13 @@ public class GlobalMetadataServlet extends HttpServlet {
 			boolean deleted = removeGlobalParameter(name);
 
 			if(deleted) {
-				sendMessage("parameter removed", 200, resp);
+				sendMessage("parameter removed", resp);
 			}
 
 			sendMessage("parameter not found", 400, resp);
 			return;
 		}
 
-		sendMessage("removed " + removeAllGlobalParameters() + " parameters", 200, resp);
+		sendMessage("removed " + removeAllGlobalParameters() + " parameters", resp);
 	}
 }
