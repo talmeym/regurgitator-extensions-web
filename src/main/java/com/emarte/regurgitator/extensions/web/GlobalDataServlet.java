@@ -5,13 +5,29 @@ import com.emarte.regurgitator.core.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.Properties;
 
 import static com.emarte.regurgitator.core.CoreConfigConstants.*;
 import static com.emarte.regurgitator.core.EntityLookup.parameterType;
+import static com.emarte.regurgitator.core.FileUtil.getInputStreamForFile;
 import static com.emarte.regurgitator.extensions.web.HttpGlobalUtil.*;
 
 public class GlobalDataServlet extends HttpServlet {
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init();
+		String propertiesLocation = config.getInitParameter("global-location");
 
+		if(propertiesLocation != null) {
+			try {
+				Properties properties = new Properties();
+				properties.load(getInputStreamForFile(propertiesLocation));
+				HttpGlobalUtil.addGlobalParametersFromProperties(propertiesLocation, properties);
+			} catch (Exception e) {
+				throw new ServletException(e);
+			}
+		}
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
