@@ -54,10 +54,16 @@ public class GlobalMetadataServlet extends HttpServlet {
 
 	private void returnParameter(String name, HttpServletResponse resp) throws IOException {
 		Parameter parameter = getGlobalParameter(name);
-		sendMessage(parameter != null ? parameterString(parameter) : "parameter not found", resp);
+
+		if(parameter != null) {
+			sendMessage(parameterString(parameter), 200, resp);
+		}
+
+		sendMessage("parameter not found", 400, resp);
 	}
 
-	private void sendMessage(String message, HttpServletResponse resp) throws IOException {
+	private void sendMessage(String message, int statusCode, HttpServletResponse resp) throws IOException {
+		resp.setStatus(statusCode);
 		ServletOutputStream outputStream = resp.getOutputStream();
 		outputStream.write(message.getBytes());
 		outputStream.flush();
@@ -77,10 +83,9 @@ public class GlobalMetadataServlet extends HttpServlet {
 		try {
 			ParameterType parameterType = type != null ? parameterType(type) : CoreTypes.STRING;
 			setGlobalParameter(name, parameterType, value);
-			resp.setStatus(200);
-			sendMessage("parameter set", resp);
+			sendMessage("parameter set", 200, resp);
 		} catch (RegurgitatorException e) {
-			sendMessage("parameter type not found", resp);
+			sendMessage("parameter type not found", 400, resp);
 		}
 	}
 
@@ -89,10 +94,10 @@ public class GlobalMetadataServlet extends HttpServlet {
 		String name = req.getParameter(NAME);
 
 		if(name != null && name.length() > 0) {
-			sendMessage("parameter " + (removeGlobalParameter(name) ? "removed" : "not found"), resp);
+			sendMessage("parameter " + (removeGlobalParameter(name) ? "removed" : "not found"), 200, resp);
 			return;
 		}
 
-		sendMessage("removed " + removeAllGlobalParameters() + " parameters", resp);
+		sendMessage("removed " + removeAllGlobalParameters() + " parameters", 200, resp);
 	}
 }
