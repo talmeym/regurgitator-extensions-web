@@ -94,7 +94,13 @@ public class GlobalMetadataServlet extends HttpServlet {
 		String name = req.getParameter(NAME);
 
 		if(name != null && name.length() > 0) {
-			sendMessage("parameter " + (removeGlobalParameter(name) ? "removed" : "not found"), 200, resp);
+			boolean deleted = removeGlobalParameter(name);
+
+			if(deleted) {
+				sendMessage("parameter removed", 200, resp);
+			}
+
+			sendMessage("parameter not found", 400, resp);
 			return;
 		}
 
