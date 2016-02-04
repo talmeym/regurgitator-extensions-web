@@ -12,7 +12,7 @@ import static com.emarte.regurgitator.core.EntityLookup.parameterType;
 import static com.emarte.regurgitator.core.FileUtil.getInputStreamForFile;
 import static com.emarte.regurgitator.extensions.web.HttpGlobalUtil.*;
 
-public class GlobalDataServlet extends HttpServlet {
+public class GlobalMetadataServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init();
