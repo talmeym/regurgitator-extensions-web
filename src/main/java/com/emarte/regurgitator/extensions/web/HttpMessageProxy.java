@@ -16,10 +16,6 @@ public class HttpMessageProxy {
 
 	private HttpClientWrapper clientWrapper;
 
-    public HttpMessageProxy(String host, int port, String username, String password) {
-		this(new HttpClientWrapper(host, port, username, password));
-	}
-
 	protected HttpMessageProxy(HttpClientWrapper clientWrapper) {
 		this.clientWrapper = clientWrapper;
 	}
