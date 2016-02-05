@@ -13,47 +13,37 @@ import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstant
 import static junit.framework.Assert.assertEquals;
 
 public class HttpMessageProxyTest {
+	private CollectingHttpClientWrapper wrapper = getWrapper();
+	private HttpMessageProxy toTest = new HttpMessageProxy(wrapper);
+
 	@Test
 	public void testGet() throws RegurgitatorException {
-		final CollectingHttpClientWrapper wrapper = getWrapper();
-		Message response = getToTest(wrapper).proxyMessage(buildMessage(GET));
+		Message response = toTest.proxyMessage(buildMessage(GET));
 		assertEquals("GET[/path/path,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
 		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
 	}
 
 	@Test
 	public void testPut() throws RegurgitatorException {
-		final CollectingHttpClientWrapper wrapper = getWrapper();
-		Message response = getToTest(wrapper).proxyMessage(buildMessage(PUT));
+		Message response = toTest.proxyMessage(buildMessage(PUT));
 		assertEquals("PUT[/path/path,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
 		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
 	}
 
 	@Test
 	public void testPost() throws RegurgitatorException {
-		final CollectingHttpClientWrapper wrapper = getWrapper();
 		Message message = buildMessage(POST);
 		message.getContext(REQUEST_PAYLOAD_CONTEXT).setValue(TEXT, STRING, "request body");
-		Message response = getToTest(wrapper).proxyMessage(message);
+		Message response = toTest.proxyMessage(message);
 		assertEquals("POST[/path/path,request-body=text/plain; charset=UTF-8:request body,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
 		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
 	}
 
 	@Test
 	public void testDelete() throws RegurgitatorException {
-		final CollectingHttpClientWrapper wrapper = getWrapper();
-		Message response = getToTest(wrapper).proxyMessage(buildMessage(DELETE));
+		Message response = toTest.proxyMessage(buildMessage(DELETE));
 		assertEquals("DELETE[/path/path,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
 		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
-	}
-
-	private HttpMessageProxy getToTest(final CollectingHttpClientWrapper wrapper) {
-		return new HttpMessageProxy("http://this.com", 1234, "username", "password") {
-			@Override
-			protected HttpClientWrapper getWrapper(String host, int port, String username, String password) {
-				return wrapper;
-			}
-		};
 	}
 
 	private CollectingHttpClientWrapper getWrapper() {
