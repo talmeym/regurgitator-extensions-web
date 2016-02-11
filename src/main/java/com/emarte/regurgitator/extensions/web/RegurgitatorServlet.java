@@ -74,7 +74,7 @@ public class RegurgitatorServlet extends HttpServlet {
             regurgitator.processMessage(message);
         } catch (Exception e) {
 			String errorMsg = e + (e.getCause() != null ? ": " + e.getCause() : "");
-			log.error("Error handling http request: " + errorMsg);
+			log.error("Error handling http request: " + errorMsg, e);
             response.sendError(500, errorMsg);
         }
 
