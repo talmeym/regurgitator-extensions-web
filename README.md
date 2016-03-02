@@ -1,2 +1,5 @@
 # regurgitator-extensions-web
-Regurgitator is a simple extendable processing engine, ideal for regurgitating canned or clever response to incoming requests. This component provides extensions enabling use of the [core framework](https://github.com/talmeym/regurgitator-core) in web applications.
+
+regurgitator is a modular, light-weight, extendable java-based processing framework designed to 'regurgitate' canned or clever responses to incoming requests; useful for mocking or prototyping services.
+
+start your reading here: [regurgitator-all](http://github.com/talmeym/regurgitator-all#regurgitator)
