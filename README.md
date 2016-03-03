@@ -12,40 +12,42 @@ regurgitator allows the mocking of http services, using the following deployable
 
 ``RegurgitatorServlet`` maps the following java http request attributes to message parameters:
 
-|attribute|context|parameter|
+|attribute|context|parameter|type|
 |---|---|---|
-|HttpRequest.serverName|request-metadata|server-name|
-|HttpRequest.method|request-metadata|method|
-|HttpRequest.requestURI|request-metadata|request-uri|
-|HttpRequest.queryString|request-metadata|query-string|
-|HttpRequest.authType|request-metadata|auth-type|
-|HttpRequest.contextPath|request-metadata|context-path|
-|HttpRequest.pathInfo|request-metadata|path-info|
-|HttpRequest.pathTranslated|request-metadata|path-translated|
-|HttpRequest.remoteUser|request-metadata|remote-user|
-|HttpRequest.requestedSessionId|request-metadata|requested-session-id|
-|HttpRequest.servletPath|request-metadata|servlet-path|
-|HttpRequest.characterEncoding|request-metadata|character-encoding|
-|HttpRequest.contentType|request-metadata|content-type|
-|HttpRequest.localAddr|request-metadata|local-address|
-|HttpRequest.localName|request-metadata|local-name|
-|HttpRequest.protocol|request-metadata|protocol|
-|HttpRequest.remoteAddr|request-metadata|remote-address|
-|HttpRequest.remoteHost|request-metadata|remote-host|
-|HttpRequest.scheme|request-metadata|scheme|
-|HttpRequest.contentLength|request-metadata|content-length|
-|HttpRequest.localPort|request-metadata|local-port|
-|HttpRequest.serverPort|request-metadata|server-port|
-|HttpRequest.session.id|request-metadata|http-session-id|
+|HttpServletRequest.serverName|request-metadata|server-name|STRING|
+|HttpServletRequest.method|request-metadata|method|STRING|
+|HttpServletRequest.requestURI|request-metadata|request-uri|STRING|
+|HttpServletRequest.queryString|request-metadata|query-string|STRING|
+|HttpServletRequest.authType|request-metadata|auth-type|STRING|
+|HttpServletRequest.contextPath|request-metadata|context-path|STRING|
+|HttpServletRequest.pathInfo|request-metadata|path-info|STRING|
+|HttpServletRequest.pathTranslated|request-metadata|path-translated|STRING|
+|HttpServletRequest.remoteUser|request-metadata|remote-user|STRING|
+|HttpServletRequest.requestedSessionId|request-metadata|requested-session-id|STRING|
+|HttpServletRequest.servletPath|request-metadata|servlet-path|STRING|
+|HttpServletRequest.characterEncoding|request-metadata|character-encoding|STRING|
+|HttpServletRequest.contentType|request-metadata|content-type|STRING|
+|HttpServletRequest.localAddr|request-metadata|local-address|STRING|
+|HttpServletRequest.localName|request-metadata|local-name|STRING|
+|HttpServletRequest.protocol|request-metadata|protocol|STRING|
+|HttpServletRequest.remoteAddr|request-metadata|remote-address|STRING|
+|HttpServletRequest.remoteHost|request-metadata|remote-host|STRING|
+|HttpServletRequest.scheme|request-metadata|scheme|STRING|
+|HttpServletRequest.contentLength|request-metadata|content-length|NUMBER|
+|HttpServletRequest.localPort|request-metadata|local-port|NUMBER|
+|HttpServletRequest.serverPort|request-metadata|server-port|NUMBER|
+|HttpServletRequest.session.id|request-metadata|http-session-id|STRING|
+|HttpServletRequest payload|request-payload|text|STRING|
 
 ``RegurgtiatorServlet`` maps the following message parameters to HttpResponse attributes: 
 
-|context|parameter|attribute|
+|context|parameter|type|attribute|
 |---|---|---|
-|response-metadata|text|HttpResponse payload|
-|response-metadata|status-code|HttpRespone.statusCode|
-
-
+|response-payload|text|STRING|HttpServletResponse payload|
+|response-metadata|status-code|NUMBER|HttpServletResponse.status|
+|response-metadata|content-type|STRING|HttpServletResponse.setContentLength|
+|response-metadata|character-encoding|STRING|HttpServletResponse.characterEncoding|
+|response-metadata|content-length|NUMBER|HttpServletResponse.contentLength|
         
         
         
