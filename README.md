@@ -16,7 +16,7 @@ regurgitator allows the mocking of http services, using the following deployable
 
 ***http call*** => ***RegurgitatorServlet*** => ***message*** => [regurgitator] => ***message*** => ***RegurgitatorServlet*** => ***respond***
 
-### request mappings
+#### request mappings
 
 ``RegurgitatorServlet`` maps the following java http request attributes to message parameters:
 
@@ -48,7 +48,7 @@ regurgitator allows the mocking of http services, using the following deployable
 |HttpServletRequest payload|request-payload|text|STRING|
 |HttpServletRequest headers|request-headers|[header-name]|STRING|
 
-### response mappings
+#### response mappings
 
 ``RegurgtiatorServlet`` maps the following message parameters to HttpResponse attributes: 
 
