@@ -17,7 +17,7 @@ regurgitator allows the mocking of http services, using the following deployable
 <web-app id="WebApp_ID" version="2.4"
 		 xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-	<display-name>My Mock Server</display-name>
+	<display-name>My Mocked Server</display-name>
 
 	<servlet>
 		<servlet-name>RegurgitatorServlet</servlet-name>
