@@ -38,12 +38,14 @@ regurgitator allows the mocking of http services, using the following deployable
 |HttpServletRequest.serverPort|request-metadata|server-port|NUMBER|
 |HttpServletRequest.session.id|request-metadata|http-session-id|STRING|
 |HttpServletRequest payload|request-payload|text|STRING|
+|HttpServletRequest headers|request-headers|[header-name]|STRING|
 
 ``RegurgtiatorServlet`` maps the following message parameters to HttpResponse attributes: 
 
 |context|parameter|type|attribute|
 |---|---|---|---|
 |response-payload|text|STRING|HttpServletResponse payload|
+|response-headers|[header-name]|STRING|HttpServletResponse headers|
 |response-metadata|status-code|NUMBER|HttpServletResponse.status|
 |response-metadata|content-type|STRING|HttpServletResponse.setContentLength|
 |response-metadata|character-encoding|STRING|HttpServletResponse.characterEncoding|
