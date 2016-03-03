@@ -39,7 +39,7 @@ regurgitator allows the mocking of http services, using the following deployable
 ## steps
 
 regurgitator-extensions-web provides the following steps:
-- ``http-call`` make an outward http call, using parameter values for host, port, request-uri etc.
+- ``http-call`` make an outward http call, using parameter values for request metadata, headers etc.
 - ``create-http-response`` create a response, pre-populating parameters for content-type and status code
 
 ## constructs
