@@ -42,7 +42,7 @@ regurgitator allows the mocking of http services, using the following deployable
 ``RegurgtiatorServlet`` maps the following message parameters to HttpResponse attributes: 
 
 |context|parameter|type|attribute|
-|---|---|---|
+|---|---|---|---|
 |response-payload|text|STRING|HttpServletResponse payload|
 |response-metadata|status-code|NUMBER|HttpServletResponse.status|
 |response-metadata|content-type|STRING|HttpServletResponse.setContentLength|
