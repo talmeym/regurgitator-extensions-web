@@ -10,6 +10,8 @@ regurgitator allows the mocking of http services, using the following deployable
 - ``com.emarte.regurgitator.extensions.web.RegurgitatorServlet`` accepts http requests, passes them to regurgitator as messages, returns configured http responses
 - ``com.emarte.regurgitator.extensions.web.GlobalMetadataServlet`` allows the setting of global parameters, applied to incoming messages before processing
 
+### request mappings
+
 ``RegurgitatorServlet`` maps the following java http request attributes to message parameters:
 
 |attribute|context|parameter|type|
@@ -39,6 +41,8 @@ regurgitator allows the mocking of http services, using the following deployable
 |HttpServletRequest.session.id|request-metadata|http-session-id|STRING|
 |HttpServletRequest payload|request-payload|text|STRING|
 |HttpServletRequest headers|request-headers|[header-name]|STRING|
+
+### response mappings
 
 ``RegurgtiatorServlet`` maps the following message parameters to HttpResponse attributes: 
 
