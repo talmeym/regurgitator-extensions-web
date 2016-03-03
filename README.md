@@ -10,6 +10,64 @@ regurgitator allows the mocking of http services, using the following deployable
 - ``com.emarte.regurgitator.extensions.web.RegurgitatorServlet`` accepts http requests, passes them to regurgitator as messages, returns configured http responses
 - ``com.emarte.regurgitator.extensions.web.GlobalMetadataServlet`` allows the setting of global parameters, applied to incoming messages before processing
 
+``RegurgitatorServlet`` maps the following java http request attributes to message parameters:
+
+|attribute|context|parameter|
+|---|---|---|
+|HttpRequest.serverName|request-metadata|server-name|
+|HttpRequest.method|request-metadata|method|
+|HttpRequest.requestURI|request-metadata|request-uri|
+|HttpRequest.queryString|request-metadata|query-string|
+|HttpRequest.authType|request-metadata|auth-type|
+|HttpRequest.contextPath|request-metadata|context-path|
+|HttpRequest.pathInfo|request-metadata|path-info|
+|HttpRequest.pathTranslated|request-metadata|path-translated|
+|HttpRequest.remoteUser|request-metadata|remote-user|
+|HttpRequest.requestedSessionId|request-metadata|requested-session-id|
+|HttpRequest.servletPath|request-metadata|servlet-path|
+|HttpRequest.characterEncoding|request-metadata|character-encoding|
+|HttpRequest.contentType|request-metadata|content-type|
+|HttpRequest.localAddr|request-metadata|local-address|
+|HttpRequest.localName|request-metadata|local-name|
+|HttpRequest.protocol|request-metadata|protocol|
+|HttpRequest.remoteAddr|request-metadata|remote-address|
+|HttpRequest.remoteHost|request-metadata|remote-host|
+|HttpRequest.scheme|request-metadata|scheme|
+|HttpRequest.contentLength|request-metadata|content-length|
+|HttpRequest.localPort|request-metadata|local-port|
+|HttpRequest.serverPort|request-metadata|server-port|
+|HttpRequest.session.id|request-metadata|http-session-id|
+
+``RegurgtiatorServlet`` maps the following message parameters to HttpResponse attributes: 
+
+|context|parameter|attribute|
+|---|---|---|
+|response-metadata|text|HttpResponse payload|
+|response-metadata|status-code|HttpRespone.statusCode|
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
 ### example web.xml
 
 ```xml
