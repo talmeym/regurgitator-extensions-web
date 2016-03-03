@@ -22,7 +22,7 @@ regurgitator allows the mocking of http services, using the following deployable
 
 |attribute|context|parameter|type|
 |---|---|---|---|
-|HttpServletRequest.serverName|request-metadata|server-name|STRING|
+|``HttpServletRequest.serverName``|``request-metadata``|``server-name``|``STRING``|
 |HttpServletRequest.method|request-metadata|method|STRING|
 |HttpServletRequest.requestURI|request-metadata|request-uri|STRING|
 |HttpServletRequest.queryString|request-metadata|query-string|STRING|
