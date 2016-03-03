@@ -20,4 +20,4 @@ regurgitator-extensions-web provides the following constructs:
 
 regurgitator-extensions-web provides the following deployable servlets:
 - ``com.emarte.regurgitator.RegurgitatorServlet`` accepts http requests, passing them to regurgitator as messages
-- ``com.emarte.regurgitator.GlobalDataServlet`` allows the setting of global parameters, applied to incoming messages
+- ``com.emarte.regurgitator.GlobalMetadataServlet`` allows the setting of global parameters, applied to incoming messages
