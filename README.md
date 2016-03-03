@@ -54,7 +54,7 @@ regurgitator allows the mocking of http services, using the following deployable
 
 |context|parameter|type|attribute|
 |---|---|---|---|
-|``response-payload``|``text``|STRING|HttpServletResponse payload|
+|``response-payload``|``text``|``STRING``|``HttpServletResponse payload``|
 |``response-headers``|``[header-name]``|``STRING``|``HttpServletResponse headers``|
 |``response-metadata``|``status-code``|``NUMBER``|``HttpServletResponse.status``|
 |``response-metadata``|``content-type``|``STRING``|``HttpServletResponse.contentLength``|
