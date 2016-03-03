@@ -63,6 +63,8 @@ regurgitator allows the mocking of http services, using the following deployable
 
 ### example web.xml
 
+below is an example web.xml for mapping all incoming http requests to ``RegurgitatorServlet``
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="2.4"
