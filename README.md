@@ -13,7 +13,7 @@ regurgitator allows the mocking of http services, using the following deployable
 ``RegurgitatorServlet`` maps the following java http request attributes to message parameters:
 
 |attribute|context|parameter|type|
-|---|---|---|
+|---|---|---|---|
 |HttpServletRequest.serverName|request-metadata|server-name|STRING|
 |HttpServletRequest.method|request-metadata|method|STRING|
 |HttpServletRequest.requestURI|request-metadata|request-uri|STRING|
