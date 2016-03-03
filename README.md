@@ -14,7 +14,7 @@ regurgitator allows the mocking of http services, using the following deployable
 
 ``RegurgitatorServlet`` accepts http calls and maps request attributes to message parameters. It then passes the message to regurgitator for processing. When regurgitator returns its first (and only) response, ``RegurgitatorServlet`` maps any populated response parameters to http response attributes, and returns the response to the caller.
 
-***http call*** => ***RegurgitatorServlet*** => ***message*** => [regurgitator] => ***message*** => ***RegurgitatorServlet*** => ***respond***
+***http call*** => ***RegurgitatorServlet*** => ***message*** => [regurgitator] => ***message*** => ***RegurgitatorServlet*** => ***response***
 
 ### request mappings
 
