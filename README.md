@@ -23,30 +23,30 @@ regurgitator allows the mocking of http services, using the following deployable
 |attribute|context|parameter|type|
 |---|---|---|---|
 |``HttpServletRequest.serverName``|``request-metadata``|``server-name``|``STRING``|
-|HttpServletRequest.method|request-metadata|method|STRING|
-|HttpServletRequest.requestURI|request-metadata|request-uri|STRING|
-|HttpServletRequest.queryString|request-metadata|query-string|STRING|
-|HttpServletRequest.authType|request-metadata|auth-type|STRING|
-|HttpServletRequest.contextPath|request-metadata|context-path|STRING|
-|HttpServletRequest.pathInfo|request-metadata|path-info|STRING|
-|HttpServletRequest.pathTranslated|request-metadata|path-translated|STRING|
-|HttpServletRequest.remoteUser|request-metadata|remote-user|STRING|
-|HttpServletRequest.requestedSessionId|request-metadata|requested-session-id|STRING|
-|HttpServletRequest.servletPath|request-metadata|servlet-path|STRING|
-|HttpServletRequest.characterEncoding|request-metadata|character-encoding|STRING|
-|HttpServletRequest.contentType|request-metadata|content-type|STRING|
-|HttpServletRequest.localAddr|request-metadata|local-address|STRING|
-|HttpServletRequest.localName|request-metadata|local-name|STRING|
-|HttpServletRequest.protocol|request-metadata|protocol|STRING|
-|HttpServletRequest.remoteAddr|request-metadata|remote-address|STRING|
-|HttpServletRequest.remoteHost|request-metadata|remote-host|STRING|
-|HttpServletRequest.scheme|request-metadata|scheme|STRING|
-|HttpServletRequest.contentLength|request-metadata|content-length|NUMBER|
-|HttpServletRequest.localPort|request-metadata|local-port|NUMBER|
-|HttpServletRequest.serverPort|request-metadata|server-port|NUMBER|
-|HttpServletRequest.session.id|request-metadata|http-session-id|STRING|
-|HttpServletRequest payload|request-payload|text|STRING|
-|HttpServletRequest headers|request-headers|[header-name]|STRING|
+|``HttpServletRequest.method``|``request-metadata``|``method``|``STRING``|
+|``HttpServletRequest.requestURI``|``request-metadata``|``request-uri``|``STRING``|
+|``HttpServletRequest.queryString``|``request-metadata``|``query-string``|``STRING``|
+|``HttpServletRequest.authType``|``request-metadata``|``auth-type``|``STRING``|
+|``HttpServletRequest.contextPath``|``request-metadata``|``context-path``|``STRING``|
+|``HttpServletRequest.pathInfo``|``request-metadata``|``path-info``|``STRING``|
+|``HttpServletRequest.pathTranslated``|``request-metadata``|``path-translated``|``STRING``|
+|``HttpServletRequest.remoteUser``|``request-metadata``|``remote-user``|``STRING``|
+|``HttpServletRequest.requestedSessionId``|``request-metadata``|``requested-session-id``|``STRING``|
+|``HttpServletRequest.servletPath``|``request-metadata``|``servlet-path``|``STRING``|
+|``HttpServletRequest.characterEncoding``|``request-metadata``|``character-encoding``|``STRING``|
+|``HttpServletRequest.contentType``|``request-metadata``|``content-type``|``STRING``|
+|``HttpServletRequest.localAddr``|``request-metadata``|``local-address``|``STRING``|
+|``HttpServletRequest.localName``|``request-metadata``|``local-name``|``STRING``|
+|``HttpServletRequest.protocol``|``request-metadata``|``protocol``|``STRING``|
+|``HttpServletRequest.remoteAddr``|``request-metadata``|``remote-address``|``STRING``|
+|``HttpServletRequest.remoteHost``|``request-metadata``|``remote-host``|``STRING``|
+|``HttpServletRequest.scheme``|``request-metadata``|``scheme``|``STRING``|
+|``HttpServletRequest.contentLength``|``request-metadata``|``content-length``|``NUMBER``|
+|``HttpServletRequest.localPort``|``request-metadata``|``local-port``|``NUMBER``|
+|``HttpServletRequest.serverPort``|``request-metadata``|``server-port``|``NUMBER``|
+|``HttpServletRequest.session.id``|``request-metadata``|``http-session-id``|``STRING``|
+|``HttpServletRequest payload``|``request-payload``|``text``|``STRING``|
+|``HttpServletRequest headers``|``request-headers``|``[header-name]``|``STRING``|
 
 ### response mappings
 
