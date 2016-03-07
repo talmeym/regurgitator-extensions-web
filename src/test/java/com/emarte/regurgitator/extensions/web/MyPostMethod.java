@@ -273,7 +273,7 @@ public class MyPostMethod extends PostMethod {
 
 	@Override
 	public String toString() {
-		return name + "[" + path + ",request-body=" + toStringRequestEntity() + ",request-headers=" + requestHeaders + ",response-headers=" + responseHeaders + ",connection-released=" + connectionReleased + "]";
+		return name + "[" + path + (requestEntity != null ? ",request-body=" + toStringRequestEntity() : "") + ",request-headers=" + requestHeaders + ",response-headers=" + responseHeaders + ",connection-released=" + connectionReleased + "]";
 	}
 
 	public String toStringRequestEntity() {

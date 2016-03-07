@@ -47,8 +47,8 @@ public class HttpMessageProxy {
     }
 
 	private HttpMethod getMethod(Message message) throws RegurgitatorException {
-		Parameters context = message.getContext(REQUEST_METADATA_CONTEXT);
-		String method = stringify(context.getValue(METHOD));
+		Parameter methodParameter = message.getContextValue(new ContextLocation(REQUEST_METADATA_CONTEXT, METHOD));
+		String method = methodParameter != null ? stringify(methodParameter.getValue()) : GET;
 
 		if(GET.equals(method)) {
 			log.debug("Using get method");
@@ -64,7 +64,8 @@ public class HttpMessageProxy {
 				String requestBody = stringify(payload);
 				log.debug("Adding payload to post method: '" + requestBody + "'");
 				try {
-				postMethod.setRequestEntity(new StringRequestEntity(requestBody, stringify(context.getValue(CONTENT_TYPE)), stringify(context.getValue(CHARACTER_ENCODING))));
+					Parameters context = message.getContext(REQUEST_METADATA_CONTEXT);
+					postMethod.setRequestEntity(new StringRequestEntity(requestBody, stringify(context.getValue(CONTENT_TYPE)), stringify(context.getValue(CHARACTER_ENCODING))));
 				} catch(UnsupportedEncodingException uee) {
 					throw new RegurgitatorException("Error encoding post body", uee);
 				}
@@ -88,8 +89,11 @@ public class HttpMessageProxy {
 
 	private static void setPath(HttpMethod method, Message message) throws RegurgitatorException {
         String path = stringify(message.getContextValue(new ContextLocation(REQUEST_METADATA_CONTEXT, PATH_INFO)));
-		log.debug("Setting method path to '" + path + "'");
-        method.setPath(path);
+
+		if(path != null) {
+			log.debug("Setting method path to '" + path + "'");
+			method.setPath(path);
+		}
     }
 
     private static void addHeaders(HttpMethod method, Parameters context) {

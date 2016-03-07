@@ -17,6 +17,20 @@ public class HttpMessageProxyTest {
 	private HttpMessageProxy toTest = new HttpMessageProxy(wrapper);
 
 	@Test
+	public void testDefaults() throws RegurgitatorException {
+		Message response = toTest.proxyMessage(new Message(null));
+		assertEquals("GET[null,request-headers={},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
+		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
+	}
+
+	@Test
+	public void testDefaultsPost() throws RegurgitatorException {
+		Message response = toTest.proxyMessage(buildDefaultPostMessage());
+		assertEquals("POST[null,request-headers={},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
+		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
+	}
+
+	@Test
 	public void testGet() throws RegurgitatorException {
 		Message response = toTest.proxyMessage(buildMessage(GET));
 		assertEquals("GET[/path/path,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
@@ -53,14 +67,20 @@ public class HttpMessageProxyTest {
 		return new CollectingHttpClientWrapper("response body", responseHeaders, 200);
 	}
 
-	private Message buildMessage(String value) throws RegurgitatorException {
+	private Message buildMessage(String method) throws RegurgitatorException {
 		Message message = new Message(null);
-		message.getContext(REQUEST_METADATA_CONTEXT).setValue(METHOD, STRING, value);
+		message.getContext(REQUEST_METADATA_CONTEXT).setValue(METHOD, STRING, method);
 		message.getContext(REQUEST_METADATA_CONTEXT).setValue(PATH_INFO, STRING, "/path/path");
 		message.getContext(REQUEST_METADATA_CONTEXT).setValue(CONTENT_TYPE, STRING, "text/plain");
 		message.getContext(REQUEST_METADATA_CONTEXT).setValue(CHARACTER_ENCODING, STRING, "UTF-8");
 		message.getContext(REQUEST_HEADERS_CONTEXT).setValue("rqh1", STRING, "rqv1");
 		message.getContext(REQUEST_HEADERS_CONTEXT).setValue("rqh2", STRING, "rqv2");
+		return message;
+	}
+
+	private Message buildDefaultPostMessage() {
+		Message message = new Message(null);
+		message.getContext(REQUEST_METADATA_CONTEXT).setValue(METHOD, POST);
 		return message;
 	}
 
