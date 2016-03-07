@@ -92,7 +92,7 @@ below is an example web.xml for mapping all incoming http requests to ``Regurgit
 ## steps
 
 regurgitator-extensions-web provides the following steps:
-- ``http-call`` make an outward http call, using parameter values for payload, request metadata, headers etc.
+- ``http-call``  ([xml](https://github.com/talmeym/regurgitator-extensions-web-xml#http-call), [json](https://github.com/talmeym/regurgitator-extensions-web-json#http-call)) make an outward http call, using parameter values for payload, request metadata, headers etc.
 - ``create-http-response`` create a response, pre-populating parameters for content-type and status code
 
 ## constructs
