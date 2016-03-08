@@ -82,29 +82,43 @@ the following http calls can be used to set and get parameters:
 
 ```
 req: GET /?name=player-name 
-res: player-name=Miles [com.emarte.regurgitator.core.StringType]
+res: 200 player-name=Miles [com.emarte.regurgitator.core.StringType]
+     or
+     400 parameter not found
 ```
 
 if the name query param is ommitted, all parameters are listed in the response:
 
 ```
 req: GET /
-res: player-name=Miles [com.emarte.regurgitator.core.StringType]
-     player-score=1000 [com.emarte.regurgitator.core.NumberType]
+res: 200 player-name=Miles [com.emarte.regurgitator.core.StringType]
+         player-score=1000 [com.emarte.regurgitator.core.NumberType]
 ```
 
 #### set parameters
 
 ```
 req: PUT /?name=player-name&type=STRING&value=Geoff
-res: parameter set
+res: 200 parameter set
+     or
+     400 parameter type not found
 ```
 
 #### delete parameter
 
 ```
 req: DELETE /?name=player-name
-res: parameter removed
+res: 200 parameter removed
+     or
+     400 parameter not found
+
+```
+
+#### delete all parameters
+
+```
+req: DELETE /
+res: 200 removed [number of parameters] parameters
 ```
 
 ### example web.xml
