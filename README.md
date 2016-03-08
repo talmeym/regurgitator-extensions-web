@@ -104,6 +104,8 @@ res: 200 parameter set
      400 parameter type not found
 ```
 
+if the ``type`` query param is ommitted, the default type set is ``STRING``
+
 #### delete parameter
 
 ```
