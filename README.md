@@ -99,5 +99,5 @@ regurgitator-extensions-web provides the following steps:
 
 regurgitator-extensions-web provides the following constructs:
 #### value processors
-- ``query-param-processor`` process a parameter value, extracting values from it using a query param format
+- ``query-param-processor`` ([xml](https://github.com/talmeym/regurgitator-extensions-web-xml#query-param-processor), [json](https://github.com/talmeym/regurgitator-extensions-web-json#query-param-processor)) process a parameter value, extracting values from it using a query param format
 
