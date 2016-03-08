@@ -76,6 +76,41 @@ parameter-name.type=STRING
 
 to set the type of a parameter, follow it's name with ``.type`` and specify the type in the same format as you would in a configuration file (``STRING``, ``LIST_OF_NUMBER`` etc).
 
+the following http calls can be used to set and get parameters:
+
+#### get parameter
+
+```
+GET /?name=player-name 
+
+player-name=Miles [com.emarte.regurgitator.core.StringType]
+```
+
+if the name query param is ommitted, all parameters are listed in the response:
+
+```
+GET /
+
+player-name=Miles [com.emarte.regurgitator.core.StringType]
+player-score=1000 [com.emarte.regurgitator.core.NumberType]
+```
+
+#### set parameters
+
+```
+PUT /?name=player-name&type=STRING&value=Geoff
+
+parameter set
+```
+
+#### delete parameter
+
+```
+DELETE /?name=player-name
+
+parameter removed
+```
+
 ### example web.xml
 
 below is an example web.xml for mapping all incoming http requests to ``RegurgitatorServlet``
