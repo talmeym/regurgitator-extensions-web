@@ -81,34 +81,34 @@ the following http calls can be used to set and get parameters:
 #### get parameter
 
 ```
-GET /?name=player-name 
+req: GET /?name=player-name 
 
-player-name=Miles [com.emarte.regurgitator.core.StringType]
+res: player-name=Miles [com.emarte.regurgitator.core.StringType]
 ```
 
 if the name query param is ommitted, all parameters are listed in the response:
 
 ```
-GET /
+req: GET /
 
-player-name=Miles [com.emarte.regurgitator.core.StringType]
-player-score=1000 [com.emarte.regurgitator.core.NumberType]
+res: player-name=Miles [com.emarte.regurgitator.core.StringType]
+     player-score=1000 [com.emarte.regurgitator.core.NumberType]
 ```
 
 #### set parameters
 
 ```
-PUT /?name=player-name&type=STRING&value=Geoff
+req: PUT /?name=player-name&type=STRING&value=Geoff
 
-parameter set
+res: parameter set
 ```
 
 #### delete parameter
 
 ```
-DELETE /?name=player-name
+req: DELETE /?name=player-name
 
-parameter removed
+res: parameter removed
 ```
 
 ### example web.xml
