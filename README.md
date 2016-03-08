@@ -82,7 +82,6 @@ the following http calls can be used to set and get parameters:
 
 ```
 req: GET /?name=player-name 
-
 res: player-name=Miles [com.emarte.regurgitator.core.StringType]
 ```
 
@@ -90,7 +89,6 @@ if the name query param is ommitted, all parameters are listed in the response:
 
 ```
 req: GET /
-
 res: player-name=Miles [com.emarte.regurgitator.core.StringType]
      player-score=1000 [com.emarte.regurgitator.core.NumberType]
 ```
@@ -99,7 +97,6 @@ res: player-name=Miles [com.emarte.regurgitator.core.StringType]
 
 ```
 req: PUT /?name=player-name&type=STRING&value=Geoff
-
 res: parameter set
 ```
 
@@ -107,7 +104,6 @@ res: parameter set
 
 ```
 req: DELETE /?name=player-name
-
 res: parameter removed
 ```
 
