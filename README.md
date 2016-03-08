@@ -63,7 +63,7 @@ regurgitator allows the mocking of http services, using the following deployable
 
 ### global metadata servlet
 
-the ``GlobalMetadataServlet`` allows for the maintenance of a set of global parameters, that are applied by regurgitator upon an incoming request to the resulting message object before it's passed to the configured steps for processing, and can then be referenced by step configurations.
+the ``GlobalMetadataServlet`` allows for the maintenance of a set of global parameters, to be applied by regurgitator upon an incoming request to the message object passed to the configured steps for processing, and can then be referenced by step configurations.
 
 it can load a set of parameters from a properties file upon initialisation and can have parameters added, modified and deleted via http calls to the servlet.
 
