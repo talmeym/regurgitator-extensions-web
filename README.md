@@ -87,7 +87,7 @@ res: 200 player-name=Miles [com.emarte.regurgitator.core.StringType]
      400 parameter not found
 ```
 
-if the name query param is ommitted, all parameters are listed in the response:
+if the ``name`` query param is ommitted, all parameters are listed in the response:
 
 ```
 req: GET /
@@ -95,7 +95,7 @@ res: 200 player-name=Miles [com.emarte.regurgitator.core.StringType]
          player-score=1000 [com.emarte.regurgitator.core.NumberType]
 ```
 
-#### set parameters
+#### set parameter
 
 ```
 req: PUT /?name=player-name&type=STRING&value=Geoff
