@@ -74,6 +74,8 @@ parameter-name=parameter-value
 parameter-name.type=STRING
 ```
 
+to set the type of a parameter, follow it's name with ``.type`` and specify the type in the same format as you would in a configuration file (``STRING``, ``LIST_OF_NUMBER`` etc).
+
 ### example web.xml
 
 below is an example web.xml for mapping all incoming http requests to ``RegurgitatorServlet``
