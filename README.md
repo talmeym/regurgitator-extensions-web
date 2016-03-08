@@ -70,8 +70,8 @@ it can load a set of parameters from a properties file upon initialisation and c
 the format for the properties file is as such:
 
 ```
-``parameter-name``=``parameter-value``
-``parameter-name``.``type``=``STRING``
+parameter-name=parameter-value
+parameter-name.type=STRING
 ```
 
 ### example web.xml
