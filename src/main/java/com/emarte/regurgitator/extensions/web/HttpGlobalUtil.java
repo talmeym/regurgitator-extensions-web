@@ -2,15 +2,15 @@ package com.emarte.regurgitator.extensions.web;
 
 import com.emarte.regurgitator.core.*;
 
-import java.io.IOException;
 import java.util.*;
 
 import static com.emarte.regurgitator.core.ConflictPolicy.REPLACE;
 import static com.emarte.regurgitator.core.EntityLookup.parameterType;
+import static com.emarte.regurgitator.core.Log.getLog;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.GLOBAL_METADATA_CONTEXT;
 
 public class HttpGlobalUtil {
-	private static final Log log = Log.getLog(HttpGlobalUtil.class);
+	private static final Log log = getLog(HttpGlobalUtil.class);
 
 	private static Map<String, Parameter> GLOBAL_PARAMETERS = new HashMap<String, Parameter>();
 

@@ -2,8 +2,7 @@ package com.emarte.regurgitator.extensions.web;
 
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.*;
 
 public class QueryParamProcessorTest {
 	private final QueryParamProcessor toTest = new QueryParamProcessor("key");

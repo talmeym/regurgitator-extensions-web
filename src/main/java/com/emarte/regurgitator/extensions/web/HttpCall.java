@@ -4,8 +4,10 @@ import com.emarte.regurgitator.core.*;
 
 import java.util.List;
 
+import static com.emarte.regurgitator.core.Log.getLog;
+
 public class HttpCall extends Container<Step> implements Step {
-    private final Log log = Log.getLog(this);
+    private final Log log = getLog(this);
     private final HttpMessageProxy messageProxy;
 
     public HttpCall(Object id, HttpMessageProxy httpMessageProxy, List<Step> steps) {

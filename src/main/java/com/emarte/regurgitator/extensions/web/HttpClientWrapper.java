@@ -6,10 +6,11 @@ import org.apache.commons.httpclient.methods.*;
 
 import java.io.IOException;
 
+import static com.emarte.regurgitator.core.Log.getLog;
 import static org.apache.commons.httpclient.auth.AuthScope.ANY;
 
 public class HttpClientWrapper {
-	private static final Log log = Log.getLog(HttpClientWrapper.class);
+	private static final Log log = getLog(HttpClientWrapper.class);
 
 	private HttpClient httpClient;
 	private String username;

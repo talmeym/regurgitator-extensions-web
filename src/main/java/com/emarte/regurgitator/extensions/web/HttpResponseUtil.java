@@ -4,10 +4,11 @@ import com.emarte.regurgitator.core.*;
 
 import javax.servlet.http.HttpServletResponse;
 
+import static com.emarte.regurgitator.core.Log.getLog;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 public class HttpResponseUtil {
-	private static final Log log = Log.getLog(HttpResponseUtil.class);
+	private static final Log log = getLog(HttpResponseUtil.class);
 
 	public static void applyResponseData(Message message, HttpServletResponse httpServletResponse) {
 		addResponseHeaders(message, httpServletResponse);

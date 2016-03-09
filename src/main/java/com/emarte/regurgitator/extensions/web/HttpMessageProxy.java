@@ -7,12 +7,13 @@ import org.apache.commons.httpclient.methods.*;
 import java.io.*;
 
 import static com.emarte.regurgitator.core.CoreTypes.STRING;
+import static com.emarte.regurgitator.core.Log.getLog;
 import static com.emarte.regurgitator.core.StringType.stringify;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 import static java.lang.String.valueOf;
 
 public class HttpMessageProxy {
-    private static final Log log = Log.getLog(HttpMessageProxy.class);
+    private static final Log log = getLog(HttpMessageProxy.class);
 
 	private HttpClientWrapper clientWrapper;
 

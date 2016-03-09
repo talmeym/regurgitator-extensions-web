@@ -2,12 +2,12 @@ package com.emarte.regurgitator.extensions.web;
 
 import com.emarte.regurgitator.core.*;
 
-import static com.emarte.regurgitator.core.CoreTypes.NUMBER;
-import static com.emarte.regurgitator.core.CoreTypes.STRING;
+import static com.emarte.regurgitator.core.CoreTypes.*;
+import static com.emarte.regurgitator.core.Log.getLog;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 public class CreateHttpResponse extends Identifiable implements Step {
-	private final Log log = Log.getLog(this);
+	private final Log log = getLog(this);
 	private final CreateResponse response;
 	private final long statusCode;
 	private final String contentType;

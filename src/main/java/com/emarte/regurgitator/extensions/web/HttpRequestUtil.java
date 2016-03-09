@@ -7,10 +7,11 @@ import java.io.*;
 import java.util.Enumeration;
 
 import static com.emarte.regurgitator.core.CoreTypes.*;
+import static com.emarte.regurgitator.core.Log.getLog;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 public class HttpRequestUtil {
-    private static final Log log = Log.getLog(HttpRequestUtil.class);
+    private static final Log log = getLog(HttpRequestUtil.class);
 
     public static Message applyRequestData(Message message, HttpServletRequest httpServletRequest) throws RegurgitatorException, IOException {
         addRequestHeaders(message, httpServletRequest);

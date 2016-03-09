@@ -4,10 +4,11 @@ import com.emarte.regurgitator.core.*;
 
 import java.util.*;
 
+import static com.emarte.regurgitator.core.Log.getLog;
 import static com.emarte.regurgitator.core.StringType.stringify;
 
 public class QueryParamProcessor implements ValueProcessor {
-	private static final Log log = Log.getLog(QueryParamProcessor.class);
+	private static final Log log = getLog(QueryParamProcessor.class);
 
 	private final String key;
 
