@@ -13,7 +13,7 @@ import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstant
 public class HttpRequestUtil {
     private static final Log log = getLog(HttpRequestUtil.class);
 
-    public static Message applyRequestData(Message message, HttpServletRequest httpServletRequest) throws RegurgitatorException, IOException {
+    public static Message applyRequestData(Message message, HttpServletRequest httpServletRequest) throws IOException, RegurgitatorException {
         addRequestHeaders(message, httpServletRequest);
         addRequestMetadata(message, httpServletRequest);
         addRequestCookies(message, httpServletRequest);

@@ -35,9 +35,10 @@ public interface ExtensionsWebConfigConstants {
     public static final String LOCAL_PORT = "local-port";
     public static final String SERVER_PORT = "server-port";
     public static final String HTTP_SESSION_ID = "http-session-id";
-    public static final String TEXT = "text";
     public static final String STATUS_CODE = "status-code";
+    public static final String TEXT = "text";
 
+	// methods
     public static final String GET = "GET";
     public static final String POST = "POST";
     public static final String PUT = "PUT";
