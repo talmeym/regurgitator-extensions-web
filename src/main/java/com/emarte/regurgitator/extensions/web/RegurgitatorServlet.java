@@ -6,6 +6,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
 
+import static com.emarte.regurgitator.core.ConfigurationFile.loadFile;
 import static com.emarte.regurgitator.core.Log.getLog;
 import static com.emarte.regurgitator.core.StringType.stringify;
 import static com.emarte.regurgitator.extensions.web.HttpGlobalUtil.applyGlobalData;
@@ -23,7 +24,7 @@ public class RegurgitatorServlet extends HttpServlet {
 
         try {
 			String id = config.getInitParameter("regurgitator-id");
-			regurgitator = new Regurgitator(id == null ? "regurgitator" : id, ConfigurationFile.loadFile(config.getInitParameter("config-location")));
+			regurgitator = new Regurgitator(id == null ? "regurgitator" : id, loadFile(config.getInitParameter("config-location")));
         } catch (RegurgitatorException e) {
             throw new ServletException(e);
         }
