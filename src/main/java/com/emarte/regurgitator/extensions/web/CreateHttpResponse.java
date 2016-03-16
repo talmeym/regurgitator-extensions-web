@@ -28,7 +28,7 @@ public class CreateHttpResponse extends Identifiable implements Step {
 		}
 
 		if(contentType != null) {
-			responseMetadata.setValue(CONTENT_TYPE, STRING, contentType);
+			responseMetadata.setValue(CONTENT_TYPE, contentType);
 		}
 
 		response.execute(message, log);
