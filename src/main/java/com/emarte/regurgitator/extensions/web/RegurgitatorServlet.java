@@ -13,9 +13,8 @@ import static com.emarte.regurgitator.extensions.web.HttpGlobalUtil.applyGlobalD
 import static com.emarte.regurgitator.extensions.web.HttpRequestUtil.applyRequestData;
 import static com.emarte.regurgitator.extensions.web.HttpResponseUtil.applyResponseData;
 
-public class RegurgitatorServlet extends HttpServlet {
-    private static final Log log = getLog(RegurgitatorServlet.class);
-
+public class RegurgitatorServlet extends HttpServlet implements HasId {
+    private final Log log = getLog(this);
     private Regurgitator regurgitator;
 
     @Override
@@ -83,4 +82,9 @@ public class RegurgitatorServlet extends HttpServlet {
 		long end = System.currentTimeMillis();
 		log.debug("*** All done: " + (end - start) + " milliseconds ***");
     }
+
+	@Override
+	public Object getId() {
+		return hashCode();
+	}
 }
