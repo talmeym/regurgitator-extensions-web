@@ -2,10 +2,12 @@ package com.emarte.regurgitator.extensions.web;
 
 import com.emarte.regurgitator.core.*;
 
-import java.io.IOException;
+import java.io.*;
 
+import static com.emarte.regurgitator.core.CoreTypes.NUMBER;
 import static com.emarte.regurgitator.core.FileUtil.*;
 import static com.emarte.regurgitator.core.StringType.stringify;
+import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 public class FileResponse extends Identifiable implements Step {
 	private static Log log = Log.getLog(FileResponse.class);
@@ -27,6 +29,10 @@ public class FileResponse extends Identifiable implements Step {
 		try {
 			String fileContents = streamToString(getInputStreamForFile(filePath));
 			message.getResponseCallback().respond(message, fileContents);
+		} catch (FileNotFoundException e) {
+			Parameters responseMetadata = message.getContext(RESPONSE_METADATA_CONTEXT);
+			responseMetadata.setValue(STATUS_CODE, NUMBER, 404l);
+			message.getResponseCallback().respond(message, "Not Found");
 		} catch (IOException e) {
 			throw new RegurgitatorException("Error loading file: " + filePath, e);
 		}

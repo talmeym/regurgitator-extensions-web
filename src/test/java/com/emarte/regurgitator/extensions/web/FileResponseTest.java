@@ -3,6 +3,8 @@ package com.emarte.regurgitator.extensions.web;
 import com.emarte.regurgitator.core.*;
 import org.junit.Test;
 
+import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.RESPONSE_METADATA_CONTEXT;
+import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.STATUS_CODE;
 import static junit.framework.Assert.assertEquals;
 
 public class FileResponseTest {
@@ -22,6 +24,19 @@ public class FileResponseTest {
 		message.getParameters().setValue("file-path", "//test.file");
 		toTest.execute(message);
 		assertEquals("file value", callback.getValue());
+	}
+
+	@Test
+	public void testFileNotFound() throws RegurgitatorException {
+		CollectingResponseCallBack callback = new CollectingResponseCallBack();
+		Message message = new Message(callback);
+
+		message.getParameters().setValue("file-path", "does.not.exist.file");
+		toTest.execute(message);
+
+		assertEquals("Not Found", callback.getValue());
+		Parameters context = message.getContext(RESPONSE_METADATA_CONTEXT);
+		assertEquals(404l, context.getValue(STATUS_CODE));
 	}
 
 	@Test
