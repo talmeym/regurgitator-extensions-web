@@ -20,28 +20,28 @@ public class HttpMessageProxyTest {
 	public void testDefaults() throws RegurgitatorException {
 		Message response = toTest.proxyMessage(new Message(null));
 		assertEquals("GET[null,request-headers={},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
-		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
+		assertEquals("message[response-metadata[status-code=200,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-payload[text=response body,],]", response.toString());
 	}
 
 	@Test
 	public void testDefaultsPost() throws RegurgitatorException {
 		Message response = toTest.proxyMessage(buildDefaultPostMessage());
 		assertEquals("POST[null,request-headers={},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
-		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
+		assertEquals("message[response-metadata[status-code=200,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-payload[text=response body,],]", response.toString());
 	}
 
 	@Test
 	public void testGet() throws RegurgitatorException {
 		Message response = toTest.proxyMessage(buildMessage(GET));
 		assertEquals("GET[/path/path,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
-		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
+		assertEquals("message[response-metadata[status-code=200,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-payload[text=response body,],]", response.toString());
 	}
 
 	@Test
 	public void testPut() throws RegurgitatorException {
 		Message response = toTest.proxyMessage(buildMessage(PUT));
 		assertEquals("PUT[/path/path,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
-		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
+		assertEquals("message[response-metadata[status-code=200,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-payload[text=response body,],]", response.toString());
 	}
 
 	@Test
@@ -49,15 +49,15 @@ public class HttpMessageProxyTest {
 		Message message = buildMessage(POST);
 		message.getContext(REQUEST_PAYLOAD_CONTEXT).setValue(TEXT, STRING, "request body");
 		Message response = toTest.proxyMessage(message);
-		assertEquals("POST[/path/path,request-body=text/plain; charset=UTF-8:request body,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
-		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
+		assertEquals("POST[/path/path,request-body=text/plain; charset=UTF-8:request body,request-headers={rqh2=rqv2, rqh1=rqv1},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
+		assertEquals("message[response-metadata[status-code=200,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-payload[text=response body,],]", response.toString());
 	}
 
 	@Test
 	public void testDelete() throws RegurgitatorException {
 		Message response = toTest.proxyMessage(buildMessage(DELETE));
 		assertEquals("DELETE[/path/path,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
-		assertEquals("message[response-payload[text=response body,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],]", response.toString());
+		assertEquals("message[response-metadata[status-code=200,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-payload[text=response body,],]", response.toString());
 	}
 
 	private CollectingHttpClientWrapper getWrapper() {
