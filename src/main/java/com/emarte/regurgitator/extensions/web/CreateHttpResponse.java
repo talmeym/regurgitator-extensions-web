@@ -24,10 +24,12 @@ public class CreateHttpResponse extends Identifiable implements Step {
 		Parameters responseMetadata = message.getContext(RESPONSE_METADATA_CONTEXT);
 
 		if(statusCode != -1) {
+			log.debug("Setting status code");
 			responseMetadata.setValue(STATUS_CODE, NUMBER, statusCode);
 		}
 
 		if(contentType != null) {
+			log.debug("Setting content type");
 			responseMetadata.setValue(CONTENT_TYPE, contentType);
 		}
 

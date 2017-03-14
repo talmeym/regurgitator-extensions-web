@@ -53,13 +53,16 @@ public class HttpRequestUtil {
     }
 
     private static void addRequestHeaders(Message message, HttpServletRequest request) throws RegurgitatorException {
-        log.debug("Adding headers to message from http request");
         Enumeration<String> headerNames = request.getHeaderNames();
 
-        while(headerNames.hasMoreElements()) {
-            String name = headerNames.nextElement();
-            String value = request.getHeader(name);
-            addStringParam(message, REQUEST_HEADERS_CONTEXT, name, value);
+        if(headerNames.hasMoreElements()) {
+            log.debug("Adding headers to message from http request");
+
+            while (headerNames.hasMoreElements()) {
+                String name = headerNames.nextElement();
+                String value = request.getHeader(name);
+                addStringParam(message, REQUEST_HEADERS_CONTEXT, name, value);
+            }
         }
     }
 
