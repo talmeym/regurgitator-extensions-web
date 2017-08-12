@@ -67,11 +67,13 @@ public class HttpGlobalUtil {
 	}
 
 	public static Message applyGlobalData(Message message) throws RegurgitatorException {
-		log.debug("Adding global parameters to message");
 		Parameters context = message.getContext(GLOBAL_METADATA_CONTEXT);
 
-		for(Object id: GLOBAL_PARAMETERS.keySet()) {
-			context.setValue(GLOBAL_PARAMETERS.get(id));
+		if(context.size() > 0) {
+			log.debug("Adding global parameters to message");
+			for (Object id : GLOBAL_PARAMETERS.keySet()) {
+				context.setValue(GLOBAL_PARAMETERS.get(id));
+			}
 		}
 
 		return message;
