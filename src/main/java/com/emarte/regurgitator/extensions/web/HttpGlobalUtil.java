@@ -69,7 +69,7 @@ public class HttpGlobalUtil {
 	public static Message applyGlobalData(Message message) throws RegurgitatorException {
 		Parameters context = message.getContext(GLOBAL_METADATA_CONTEXT);
 
-		if(context.size() > 0) {
+		if(GLOBAL_PARAMETERS.size() > 0) {
 			log.debug("Adding global parameters to message");
 			for (Object id : GLOBAL_PARAMETERS.keySet()) {
 				context.setValue(GLOBAL_PARAMETERS.get(id));
@@ -81,12 +81,15 @@ public class HttpGlobalUtil {
 
 	public static int removeAllGlobalParameters() {
 		log.debug("Removing all global parameters");
-		Set<String> ids = GLOBAL_PARAMETERS.keySet();
+		int count = GLOBAL_PARAMETERS.size();
+		Iterator<Map.Entry<String, Parameter>> iterator = GLOBAL_PARAMETERS.entrySet().iterator();
 
-		for(Object id: ids) {
-			removeGlobalParameter((String)id);
+		while(iterator.hasNext()) {
+			Map.Entry<String, Parameter> entry = iterator.next();
+			log.debug("Removing global parameter '" + entry.getKey() + "'");
+			iterator.remove();
 		}
 
-		return ids.size();
+		return count;
 	}
 }
