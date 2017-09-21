@@ -7,10 +7,10 @@ import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstant
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.STATUS_CODE;
 import static junit.framework.Assert.assertEquals;
 
-public class FileResponseTest {
-	private FileResponse toTest = new FileResponse("id", new ValueSource(new ContextLocation("file-path"), null), null);
-	private FileResponse staticToTest = new FileResponse("id", new ValueSource(null, "/test.file"), null);
-	private FileResponse prefixToTest = new FileResponse("id", new ValueSource(new ContextLocation("file-path"), null), "/assets/");
+public class CreateFileResponseTest {
+	private CreateFileResponse toTest = new CreateFileResponse("id", new ValueSource(new ContextLocation("file-path"), null), null);
+	private CreateFileResponse staticToTest = new CreateFileResponse("id", new ValueSource(null, "/test.file"), null);
+	private CreateFileResponse prefixToTest = new CreateFileResponse("id", new ValueSource(new ContextLocation("file-path"), null), "/assets/");
 
 	@Test
 	public void testThis() throws RegurgitatorException {
@@ -36,7 +36,7 @@ public class FileResponseTest {
 
 		assertEquals("Not Found", callback.getValue());
 		Parameters context = message.getContext(RESPONSE_METADATA_CONTEXT);
-		assertEquals(404l, context.getValue(STATUS_CODE));
+		assertEquals(404L, context.getValue(STATUS_CODE));
 	}
 
 	@Test

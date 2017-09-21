@@ -9,13 +9,13 @@ import static com.emarte.regurgitator.core.FileUtil.*;
 import static com.emarte.regurgitator.core.StringType.stringify;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
-public class FileResponse extends Identifiable implements Step {
-	private static Log log = Log.getLog(FileResponse.class);
+public class CreateFileResponse extends Identifiable implements Step {
+	private static Log log = Log.getLog(CreateFileResponse.class);
 
 	private final ValueSource valueSource;
 	private final String pathPrefix;
 
-	public FileResponse(Object id, ValueSource valueSource, String pathPrefix) {
+	public CreateFileResponse(Object id, ValueSource valueSource, String pathPrefix) {
 		super(id);
 		this.valueSource = valueSource;
 		this.pathPrefix = pathPrefix;
@@ -31,7 +31,7 @@ public class FileResponse extends Identifiable implements Step {
 			message.getResponseCallback().respond(message, fileContents);
 		} catch (FileNotFoundException e) {
 			Parameters responseMetadata = message.getContext(RESPONSE_METADATA_CONTEXT);
-			responseMetadata.setValue(STATUS_CODE, NUMBER, 404l);
+			responseMetadata.setValue(STATUS_CODE, NUMBER, 404L);
 			message.getResponseCallback().respond(message, "Not Found");
 		} catch (IOException e) {
 			throw new RegurgitatorException("Error loading file: " + filePath, e);
