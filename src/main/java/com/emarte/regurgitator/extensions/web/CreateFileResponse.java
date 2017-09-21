@@ -10,7 +10,8 @@ import static com.emarte.regurgitator.core.StringType.stringify;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 public class CreateFileResponse extends Identifiable implements Step {
-	private static Log log = Log.getLog(CreateFileResponse.class);
+	private static final Log log = Log.getLog(CreateFileResponse.class);
+	private static final String NOT_FOUND = "Not Found";
 
 	private final ValueSource valueSource;
 	private final String pathPrefix;
@@ -24,7 +25,7 @@ public class CreateFileResponse extends Identifiable implements Step {
 	@Override
 	public void execute(Message message) throws RegurgitatorException {
 		String path = stringify(valueSource.getValue(message, log));
-		String filePath = "classpath:" + (pathPrefix != null ? checkSlashes(pathPrefix) : "") + checkSlashes(path);
+		String filePath = CLASSPATH_PREFIX + (pathPrefix != null ? checkSlashes(pathPrefix) : "") + checkSlashes(path);
 
 		try {
 			String fileContents = streamToString(getInputStreamForFile(filePath));
@@ -32,7 +33,7 @@ public class CreateFileResponse extends Identifiable implements Step {
 		} catch (FileNotFoundException e) {
 			Parameters responseMetadata = message.getContext(RESPONSE_METADATA_CONTEXT);
 			responseMetadata.setValue(STATUS_CODE, NUMBER, 404L);
-			message.getResponseCallback().respond(message, "Not Found");
+			message.getResponseCallback().respond(message, NOT_FOUND);
 		} catch (IOException e) {
 			throw new RegurgitatorException("Error loading file: " + filePath, e);
 		}
