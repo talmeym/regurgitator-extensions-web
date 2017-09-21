@@ -156,6 +156,7 @@ below is an example web.xml for mapping all incoming http requests to ``Regurgit
 regurgitator-extensions-web provides the following steps:
 - ``http-call`` ([xml](https://github.com/talmeym/regurgitator-extensions-web-xml#http-call), [json](https://github.com/talmeym/regurgitator-extensions-web-json#http-call), [yml](https://github.com/talmeym/regurgitator-extensions-web-yml#http-call)) make an outward http call, using parameter values for payload, request metadata, headers etc.
 - ``create-http-response`` ([xml](https://github.com/talmeym/regurgitator-extensions-web-xml#create-http-response), [json](https://github.com/talmeym/regurgitator-extensions-web-json#create-http-response), [yml](https://github.com/talmeym/regurgitator-extensions-web-yml#create-http-response)) create a response, pre-populating parameters for content-type and status code
+- ``file-response`` ([xml](https://github.com/talmeym/regurgitator-extensions-web-xml#file-response), [json](https://github.com/talmeym/regurgitator-extensions-web-json#file-response), [yml](https://github.com/talmeym/regurgitator-extensions-web-yml#file-response)) create a response containing the contents of a file named in a parameter
 
 ## constructs
 
