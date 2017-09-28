@@ -77,7 +77,21 @@ public class HttpMessageProxy {
 
 		if(PUT.equals(method)) {
 			log.debug("Using put method");
-			return clientWrapper.newPutMethod();
+			PutMethod putMethod = clientWrapper.newPutMethod();
+
+			Object payload = message.getContext(REQUEST_PAYLOAD_CONTEXT).getValue(TEXT);
+
+			if(payload != null) {
+				String requestBody = stringify(payload);
+				log.debug("Adding payload to put method: '" + requestBody + "'");
+				try {
+					Parameters context = message.getContext(REQUEST_METADATA_CONTEXT);
+					putMethod.setRequestEntity(new StringRequestEntity(requestBody, stringify(context.getValue(CONTENT_TYPE)), stringify(context.getValue(CHARACTER_ENCODING))));
+				} catch(UnsupportedEncodingException uee) {
+					throw new RegurgitatorException("Error encoding put body", uee);
+				}
+			}
+			return putMethod;
 		}
 
 		if(DELETE.equals(method)) {

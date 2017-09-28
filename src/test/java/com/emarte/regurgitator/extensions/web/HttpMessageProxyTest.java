@@ -3,6 +3,7 @@ package com.emarte.regurgitator.extensions.web;
 import com.emarte.regurgitator.core.*;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.PutMethod;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -39,8 +40,10 @@ public class HttpMessageProxyTest {
 
 	@Test
 	public void testPut() throws RegurgitatorException {
-		Message response = toTest.proxyMessage(buildMessage(PUT));
-		assertEquals("PUT[/path/path,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
+        Message message = buildMessage(PUT);
+        message.getContext(REQUEST_PAYLOAD_CONTEXT).setValue(TEXT, STRING, "request body");
+        Message response = toTest.proxyMessage(message);
+		assertEquals("PUT[/path/path,request-body=text/plain; charset=UTF-8:request body,request-headers={rqh2=rqv2, rqh1=rqv1},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
 		assertEquals("message[response-metadata[status-code=200,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-payload[text=response body,],]", response.toString());
 	}
 
@@ -112,9 +115,10 @@ public class HttpMessageProxyTest {
 		}
 
 		@Override
-		public HttpMethod newPutMethod() {
-			methodRequested = new MyHttpMethod("PUT", responseBody, responseHeaders, statusCode);
-			return methodRequested;
+		public PutMethod newPutMethod() {
+			MyPutMethod putMethod = new MyPutMethod("PUT", responseBody, responseHeaders, statusCode);
+			methodRequested = putMethod;
+			return putMethod;
 		}
 
 		@Override

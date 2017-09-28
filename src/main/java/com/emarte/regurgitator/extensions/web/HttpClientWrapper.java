@@ -53,7 +53,7 @@ public class HttpClientWrapper {
 		return new PostMethod();
 	}
 
-	public HttpMethod newPutMethod() {
+	public PutMethod newPutMethod() {
 		return new PutMethod();
 	}
 
