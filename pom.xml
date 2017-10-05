@@ -1,55 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.emarte.regurgitator</groupId>
-	<artifactId>regurgitator-extensions-web</artifactId>
-	<version>0.0.1</version>
-	<packaging>jar</packaging>
-	<name>Regurgitator Extensions Web</name>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.emarte.regurgitator</groupId>
+    <artifactId>regurgitator-extensions-web</artifactId>
+    <version>0.0.1</version>
+    <packaging>jar</packaging>
+    <name>Regurgitator Extensions Web</name>
 
-	<properties>
-			<maven.compiler.source>1.6</maven.compiler.source>
-			<maven.compiler.target>1.6</maven.compiler.target>
-    		<github.global.server>github</github.global.server>
-	</properties>
+    <properties>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+		<github.global.server>github</github.global.server>
+    </properties>
 
-	<distributionManagement>
-		<repository>
-			<id>internal.repo</id>
-			<name>Temporary Staging Repository</name>
-			<url>file:///tmp/regurgitator-mvn-repo</url>
-		</repository>
-	</distributionManagement>
+    <distributionManagement>
+        <repository>
+            <id>internal.repo</id>
+            <name>Temporary Staging Repository</name>
+            <url>file:///tmp/regurgitator-mvn-repo</url>
+        </repository>
+    </distributionManagement>
 
-	<dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>com.emarte.regurgitator</groupId>
+            <artifactId>regurgitator-core-config</artifactId>
+            <version>0.0.1</version>
+        </dependency>
 
-		<dependency>
-			<groupId>com.emarte.regurgitator</groupId>
-			<artifactId>regurgitator-core-config</artifactId>
-			<version>0.0.1</version>
-		</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.4</version>
+        </dependency>
 
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.4</version>
-		</dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
 
-		<dependency>
-			<groupId>commons-httpclient</groupId>
-			<artifactId>commons-httpclient</artifactId>
-			<version>3.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
-			<scope>compile</scope>
-		</dependency>
-	</dependencies>
-
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>
