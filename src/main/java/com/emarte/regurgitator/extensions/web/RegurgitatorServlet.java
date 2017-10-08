@@ -22,8 +22,8 @@ public class RegurgitatorServlet extends HttpServlet implements HasId {
         super.init();
 
         try {
-			String id = config.getInitParameter("regurgitator-id");
-			regurgitator = new Regurgitator(id == null ? "regurgitator" : id, loadFile(config.getInitParameter("config-location")));
+            String id = config.getInitParameter("regurgitator-id");
+            regurgitator = new Regurgitator(id == null ? "regurgitator" : id, loadFile(config.getInitParameter("config-location")));
         } catch (RegurgitatorException e) {
             throw new ServletException(e);
         }
@@ -31,34 +31,34 @@ public class RegurgitatorServlet extends HttpServlet implements HasId {
 
     @Override
     protected void service(HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
-		long start = System.currentTimeMillis();
+        long start = System.currentTimeMillis();
 
-		try {
+        try {
             log.debug("Accepting new http request");
 
             ResponseCallBack responseCallBack = new ResponseCallBack() {
                 @Override
                 public void respond(Message message, Object value) {
-					log.debug("Processing callback");
-					log.debug("Applying message data to http response");
-					applyResponseData(message, response);
+                    log.debug("Processing callback");
+                    log.debug("Applying message data to http response");
+                    applyResponseData(message, response);
 
                     log.debug("Writing back response payload");
-					try {
-            			ServletOutputStream outputStream = response.getOutputStream();
-						outputStream.write(stringify(value).getBytes());
-						outputStream.flush();
-						outputStream.close();
-					} catch (IOException e) {
-						log.error("Error writing response text back from servlet: " + e.getMessage());
-						try {
-							response.sendError(500, e + (e.getCause() != null ? ": " + e.getCause() : ""));
-						} catch (IOException e1) {
-							// I tried
-						}
-					}
+                    try {
+                        ServletOutputStream outputStream = response.getOutputStream();
+                        outputStream.write(stringify(value).getBytes());
+                        outputStream.flush();
+                        outputStream.close();
+                    } catch (IOException e) {
+                        log.error("Error writing response text back from servlet", e);
+                        try {
+                            response.sendError(500, e + (e.getCause() != null ? ": " + e.getCause() : ""));
+                        } catch (IOException e1) {
+                            // I tried
+                        }
+                    }
 
-					log.debug("Callback processing complete");
+                    log.debug("Callback processing complete");
                 }
             };
 
@@ -69,22 +69,22 @@ public class RegurgitatorServlet extends HttpServlet implements HasId {
             applyRequestData(message, request);
 
             log.debug("Applying global details to message");
-			applyGlobalData(message);
+            applyGlobalData(message);
 
             log.debug("Sending message to regurgitator");
             regurgitator.processMessage(message);
         } catch (Exception e) {
-			String errorMsg = e + (e.getCause() != null ? ": " + e.getCause() : "");
-			log.error("Error handling http request: " + errorMsg, e);
+            String errorMsg = e + (e.getCause() != null ? ": " + e.getCause() : "");
+            log.error("Error handling http request", e);
             response.sendError(500, errorMsg);
         }
 
-		long end = System.currentTimeMillis();
-		log.debug("*** All done: " + (end - start) + " milliseconds ***");
+        long end = System.currentTimeMillis();
+        log.debug("*** All done: {} milliseconds ***", end - start);
     }
 
-	@Override
-	public Object getId() {
-		return hashCode();
-	}
+    @Override
+    public Object getId() {
+        return hashCode();
+    }
 }

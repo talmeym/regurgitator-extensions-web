@@ -10,17 +10,17 @@ import static com.emarte.regurgitator.core.CoreTypes.*;
 import static com.emarte.regurgitator.core.Log.getLog;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
-public class HttpRequestUtil {
+class HttpRequestUtil {
     private static final Log log = getLog(HttpRequestUtil.class);
 
-    public static void applyRequestData(Message message, HttpServletRequest httpServletRequest) throws IOException, RegurgitatorException {
+    static void applyRequestData(Message message, HttpServletRequest httpServletRequest) throws IOException {
         addRequestHeaders(message, httpServletRequest);
         addRequestMetadata(message, httpServletRequest);
         addRequestCookies(message, httpServletRequest);
         addPayload(message, httpServletRequest);
     }
 
-    private static void addRequestMetadata(Message message, HttpServletRequest request) throws RegurgitatorException {
+    private static void addRequestMetadata(Message message, HttpServletRequest request) {
         log.debug("Adding metadata to message from http request");
         addStringParam(message, REQUEST_METADATA_CONTEXT, METHOD, request.getMethod());
         addStringParam(message, REQUEST_METADATA_CONTEXT, REQUEST_URI, request.getRequestURI());
@@ -47,12 +47,12 @@ public class HttpRequestUtil {
         addStringParam(message, REQUEST_METADATA_CONTEXT, HTTP_SESSION_ID, request.getSession(true).getId());
     }
 
-    private static void addPayload(Message message, HttpServletRequest request) throws IOException, RegurgitatorException {
+    private static void addPayload(Message message, HttpServletRequest request) throws IOException {
         log.debug("Adding payload to message from http request");
         addStringParam(message, REQUEST_PAYLOAD_CONTEXT, TEXT, getPayload(request));
     }
 
-    private static void addRequestHeaders(Message message, HttpServletRequest request) throws RegurgitatorException {
+    private static void addRequestHeaders(Message message, HttpServletRequest request) {
         Enumeration<String> headerNames = request.getHeaderNames();
 
         if(headerNames.hasMoreElements()) {
@@ -66,7 +66,7 @@ public class HttpRequestUtil {
         }
     }
 
-    private static void addRequestCookies(Message message, HttpServletRequest request) throws RegurgitatorException {
+    private static void addRequestCookies(Message message, HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
 
         if(cookies != null) {
@@ -80,13 +80,13 @@ public class HttpRequestUtil {
         }
     }
 
-    private static void addStringParam(Message message, String context, String name, String value) throws RegurgitatorException {
+    private static void addStringParam(Message message, String context, String name, String value) {
         if(value != null && value.length() > 0) {
             message.getContext(context).setValue(name, STRING, value);
         }
     }
 
-    private static void addIntegerParam(Message message, String context, String name, Integer value) throws RegurgitatorException {
+    private static void addIntegerParam(Message message, String context, String name, Integer value) {
         if(value != null) {
             message.getContext(context).setValue(name, NUMBER, (long) value);
         }

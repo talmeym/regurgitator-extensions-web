@@ -8,70 +8,70 @@ import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstant
 import static junit.framework.Assert.assertEquals;
 
 public class CreateFileResponseTest {
-	private CreateFileResponse toTest = new CreateFileResponse("id", new ValueSource(new ContextLocation("file-path"), null), null);
-	private CreateFileResponse staticToTest = new CreateFileResponse("id", new ValueSource(null, "/test.file"), null);
-	private CreateFileResponse prefixToTest = new CreateFileResponse("id", new ValueSource(new ContextLocation("file-path"), null), "/assets/");
+    private final CreateFileResponse toTest = new CreateFileResponse("id", new ValueSource(new ContextLocation("file-path"), null), null);
+    private final CreateFileResponse staticToTest = new CreateFileResponse("id", new ValueSource(null, "/test.file"), null);
+    private final CreateFileResponse prefixToTest = new CreateFileResponse("id", new ValueSource(new ContextLocation("file-path"), null), "/assets/");
 
-	@Test
-	public void testThis() throws RegurgitatorException {
-		CollectingResponseCallBack callback = new CollectingResponseCallBack();
-		Message message = new Message(callback);
+    @Test
+    public void testThis() throws RegurgitatorException {
+        CollectingResponseCallBack callback = new CollectingResponseCallBack();
+        Message message = new Message(callback);
 
-		message.getParameters().setValue("file-path", "test.file");
-		toTest.execute(message);
-		assertEquals("file value", callback.getValue());
+        message.getParameters().setValue("file-path", "test.file");
+        toTest.execute(message);
+        assertEquals("file value", callback.getValue());
 
-		message.getParameters().setValue("file-path", "//test.file");
-		toTest.execute(message);
-		assertEquals("file value", callback.getValue());
-	}
+        message.getParameters().setValue("file-path", "//test.file");
+        toTest.execute(message);
+        assertEquals("file value", callback.getValue());
+    }
 
-	@Test
-	public void testFileNotFound() throws RegurgitatorException {
-		CollectingResponseCallBack callback = new CollectingResponseCallBack();
-		Message message = new Message(callback);
+    @Test
+    public void testFileNotFound() throws RegurgitatorException {
+        CollectingResponseCallBack callback = new CollectingResponseCallBack();
+        Message message = new Message(callback);
 
-		message.getParameters().setValue("file-path", "does.not.exist.file");
-		toTest.execute(message);
+        message.getParameters().setValue("file-path", "does.not.exist.file");
+        toTest.execute(message);
 
-		assertEquals("Not Found", callback.getValue());
-		Parameters context = message.getContext(RESPONSE_METADATA_CONTEXT);
-		assertEquals(404L, context.getValue(STATUS_CODE));
-	}
+        assertEquals("Not Found", callback.getValue());
+        Parameters context = message.getContext(RESPONSE_METADATA_CONTEXT);
+        assertEquals(404L, context.getValue(STATUS_CODE));
+    }
 
-	@Test
-	public void testStaticValue() throws RegurgitatorException {
-		CollectingResponseCallBack callback = new CollectingResponseCallBack();
-		Message message = new Message(callback);
+    @Test
+    public void testStaticValue() throws RegurgitatorException {
+        CollectingResponseCallBack callback = new CollectingResponseCallBack();
+        Message message = new Message(callback);
 
-		staticToTest.execute(message);
-		assertEquals("file value", callback.getValue());
-	}
+        staticToTest.execute(message);
+        assertEquals("file value", callback.getValue());
+    }
 
-	@Test
-	public void testPrefix() throws RegurgitatorException {
-		CollectingResponseCallBack callback = new CollectingResponseCallBack();
-		Message message = new Message(callback);
+    @Test
+    public void testPrefix() throws RegurgitatorException {
+        CollectingResponseCallBack callback = new CollectingResponseCallBack();
+        Message message = new Message(callback);
 
-		message.getParameters().setValue("file-path", "dir/test.file");
-		prefixToTest.execute(message);
-		assertEquals("assets file value", callback.getValue());
+        message.getParameters().setValue("file-path", "dir/test.file");
+        prefixToTest.execute(message);
+        assertEquals("assets file value", callback.getValue());
 
-		message.getParameters().setValue("file-path", "//dir/test.file");
-		prefixToTest.execute(message);
-		assertEquals("assets file value", callback.getValue());
-	}
+        message.getParameters().setValue("file-path", "//dir/test.file");
+        prefixToTest.execute(message);
+        assertEquals("assets file value", callback.getValue());
+    }
 
-	private class CollectingResponseCallBack implements ResponseCallBack {
-		private Object value;
+    private class CollectingResponseCallBack implements ResponseCallBack {
+        private Object value;
 
-		@Override
-		public void respond(Message message, Object value) {
-			this.value = value;
-		}
+        @Override
+        public void respond(Message message, Object value) {
+            this.value = value;
+        }
 
-		public Object getValue() {
-			return value;
-		}
-	};
+        public Object getValue() {
+            return value;
+        }
+    }
 }

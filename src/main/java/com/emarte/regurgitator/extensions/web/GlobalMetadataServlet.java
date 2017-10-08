@@ -13,101 +13,101 @@ import static com.emarte.regurgitator.core.FileUtil.getInputStreamForFile;
 import static com.emarte.regurgitator.extensions.web.HttpGlobalUtil.*;
 
 public class GlobalMetadataServlet extends HttpServlet {
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init();
-		String propertiesLocation = config.getInitParameter("global-location");
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init();
+        String propertiesLocation = config.getInitParameter("global-location");
 
-		if(propertiesLocation != null) {
-			try {
-				Properties properties = new Properties();
-				properties.load(getInputStreamForFile(propertiesLocation));
-				addGlobalParametersFromProperties(propertiesLocation, properties);
-			} catch (Exception e) {
-				throw new ServletException(e);
-			}
-		}
-	}
+        if(propertiesLocation != null) {
+            try {
+                Properties properties = new Properties();
+                properties.load(getInputStreamForFile(propertiesLocation));
+                addGlobalParametersFromProperties(propertiesLocation, properties);
+            } catch (Exception e) {
+                throw new ServletException(e);
+            }
+        }
+    }
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String name = req.getParameter(NAME);
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter(NAME);
 
-		if(name != null && name.length() > 0) {
-			returnParameter(name, resp);
-			return;
-		}
+        if(name != null && name.length() > 0) {
+            returnParameter(name, resp);
+            return;
+        }
 
-		returnAllParameters(resp);
-	}
+        returnAllParameters(resp);
+    }
 
-	private void returnAllParameters(HttpServletResponse resp) throws IOException {
-		ServletOutputStream outputStream = resp.getOutputStream();
+    private void returnAllParameters(HttpServletResponse resp) throws IOException {
+        ServletOutputStream outputStream = resp.getOutputStream();
 
-		for(Parameter parameter: getAllGlobalParameters()) {
-			outputStream.write(parameterString(parameter).getBytes());
-		}
+        for(Parameter parameter: getAllGlobalParameters()) {
+            outputStream.write(parameterString(parameter).getBytes());
+        }
 
-		outputStream.flush();
-		outputStream.close();
-	}
+        outputStream.flush();
+        outputStream.close();
+    }
 
-	private void returnParameter(String name, HttpServletResponse resp) throws IOException {
-		Parameter parameter = getGlobalParameter(name);
+    private void returnParameter(String name, HttpServletResponse resp) throws IOException {
+        Parameter parameter = getGlobalParameter(name);
 
-		if(parameter != null) {
-			sendMessage(parameterString(parameter), resp);
-		}
+        if(parameter != null) {
+            sendMessage(parameterString(parameter), resp);
+        }
 
-		sendMessage("parameter not found", 400, resp);
-	}
+        sendMessage("parameter not found", 400, resp);
+    }
 
-	private void sendMessage(String message, HttpServletResponse resp) throws IOException {
-		sendMessage(message, 200, resp);
-	}
+    private void sendMessage(String message, HttpServletResponse resp) throws IOException {
+        sendMessage(message, 200, resp);
+    }
 
-	private void sendMessage(String message, int statusCode, HttpServletResponse resp) throws IOException {
-		resp.setStatus(statusCode);
-		ServletOutputStream outputStream = resp.getOutputStream();
-		outputStream.write(message.getBytes());
-		outputStream.flush();
-		outputStream.close();
-	}
+    private void sendMessage(String message, int statusCode, HttpServletResponse resp) throws IOException {
+        resp.setStatus(statusCode);
+        ServletOutputStream outputStream = resp.getOutputStream();
+        outputStream.write(message.getBytes());
+        outputStream.flush();
+        outputStream.close();
+    }
 
-	private String parameterString(Parameter parameter) {
-		return parameter.getName() + "=" + parameter.getValue() + " [" + parameter.getType().getClass().getName() + "]\n";
-	}
+    private String parameterString(Parameter parameter) {
+        return parameter.getName() + "=" + parameter.getValue() + " [" + parameter.getType().getClass().getName() + "]\n";
+    }
 
-	@Override
-	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String name = req.getParameter(NAME);
-		String type = req.getParameter(TYPE);
-		String value = req.getParameter(VALUE);
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter(NAME);
+        String type = req.getParameter(TYPE);
+        String value = req.getParameter(VALUE);
 
-		try {
-			ParameterType parameterType = type != null ? parameterType(type) : CoreTypes.STRING;
-			setGlobalParameter(name, parameterType, value);
-			sendMessage("parameter set", resp);
-		} catch (RegurgitatorException e) {
-			sendMessage("parameter type not found", 400, resp);
-		}
-	}
+        try {
+            ParameterType parameterType = type != null ? parameterType(type) : CoreTypes.STRING;
+            setGlobalParameter(name, parameterType, value);
+            sendMessage("parameter set", resp);
+        } catch (RegurgitatorException e) {
+            sendMessage("parameter type not found", 400, resp);
+        }
+    }
 
-	@Override
-	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String name = req.getParameter(NAME);
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter(NAME);
 
-		if(name != null && name.length() > 0) {
-			boolean deleted = removeGlobalParameter(name);
+        if(name != null && name.length() > 0) {
+            boolean deleted = removeGlobalParameter(name);
 
-			if(deleted) {
-				sendMessage("parameter removed", resp);
-			}
+            if(deleted) {
+                sendMessage("parameter removed", resp);
+            }
 
-			sendMessage("parameter not found", 400, resp);
-			return;
-		}
+            sendMessage("parameter not found", 400, resp);
+            return;
+        }
 
-		sendMessage("removed " + removeAllGlobalParameters() + " parameters", resp);
-	}
+        sendMessage("removed " + removeAllGlobalParameters() + " parameters", resp);
+    }
 }

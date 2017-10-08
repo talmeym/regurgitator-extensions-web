@@ -50,7 +50,7 @@ regurgitator allows the mocking of http services, using the following deployable
 
 ### response mappings
 
-``RegurgtiatorServlet`` maps the following message parameters to HttpResponse attributes: 
+``RegurgitatorServlet`` maps the following message parameters to HttpResponse attributes: 
 
 |context|parameter|type|attribute|
 |---|---|---|---|
@@ -87,7 +87,7 @@ res: 200 player-name=Miles [com.emarte.regurgitator.core.StringType]
      400 parameter not found
 ```
 
-if the ``name`` query param is ommitted, all parameters are listed in the response:
+if the ``name`` query param is omitted, all parameters are listed in the response:
 
 ```
 req: GET /
@@ -104,7 +104,7 @@ res: 200 parameter set
      400 parameter type not found
 ```
 
-if the ``type`` query param is ommitted, the default type set is ``STRING``
+if the ``type`` query param is omitted, the default type set is ``STRING``
 
 #### delete parameter
 

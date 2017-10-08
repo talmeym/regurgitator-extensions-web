@@ -10,60 +10,60 @@ import static com.emarte.regurgitator.core.Log.getLog;
 import static org.apache.commons.httpclient.auth.AuthScope.ANY;
 
 public class HttpClientWrapper {
-	private static final Log log = getLog(HttpClientWrapper.class);
+    private static final Log log = getLog(HttpClientWrapper.class);
 
-	private HttpClient httpClient;
-	private String username;
+    private final HttpClient httpClient;
+    private String username;
 
-	public HttpClientWrapper(String host, int port, String username, String password) {
-		httpClient = new HttpClient();
-		httpClient.setHostConfiguration(getHostConfiguration(host, port));
+    public HttpClientWrapper(String host, int port, String username, String password) {
+        httpClient = new HttpClient();
+        httpClient.setHostConfiguration(getHostConfiguration(host, port));
 
-		if(username != null && password != null) {
-			httpClient.getParams().setAuthenticationPreemptive(true);
-			httpClient.getState().setCredentials(ANY, new UsernamePasswordCredentials(username, password));
-			this.username = username;
-		}
-	}
+        if(username != null && password != null) {
+            httpClient.getParams().setAuthenticationPreemptive(true);
+            httpClient.getState().setCredentials(ANY, new UsernamePasswordCredentials(username, password));
+            this.username = username;
+        }
+    }
 
-	public String getHost() {
-		return httpClient.getHostConfiguration().getHost();
-	}
+    public String getHost() {
+        return httpClient.getHostConfiguration().getHost();
+    }
 
-	public int getPort() {
-		return httpClient.getHostConfiguration().getPort();
-	}
+    public int getPort() {
+        return httpClient.getHostConfiguration().getPort();
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public int executeMethod(HttpMethod method) throws IOException {
-		String host = getHost();
-		log.debug("overriding host header with value '" + host + "'");
-		method.setRequestHeader("host", host);
-		return httpClient.executeMethod(method);
-	}
+    public int executeMethod(HttpMethod method) throws IOException {
+        String host = getHost();
+        log.debug("overriding host header with value '{}'", host);
+        method.setRequestHeader("host", host);
+        return httpClient.executeMethod(method);
+    }
 
-	public HttpMethod newGetMethod() {
-		return new GetMethod();
-	}
+    public HttpMethod newGetMethod() {
+        return new GetMethod();
+    }
 
-	public PostMethod newPostMethod() {
-		return new PostMethod();
-	}
+    public PostMethod newPostMethod() {
+        return new PostMethod();
+    }
 
-	public PutMethod newPutMethod() {
-		return new PutMethod();
-	}
+    public PutMethod newPutMethod() {
+        return new PutMethod();
+    }
 
-	public HttpMethod newDeleteMethod() {
-		return new DeleteMethod();
-	}
+    public HttpMethod newDeleteMethod() {
+        return new DeleteMethod();
+    }
 
-	private static HostConfiguration getHostConfiguration(String host, int port) {
-		HostConfiguration hostConfiguration = new HostConfiguration();
-		hostConfiguration.setHost(host, port);
-		return hostConfiguration;
-	}
+    private static HostConfiguration getHostConfiguration(String host, int port) {
+        HostConfiguration hostConfiguration = new HostConfiguration();
+        hostConfiguration.setHost(host, port);
+        return hostConfiguration;
+    }
 }

@@ -20,13 +20,13 @@ public class HttpCall extends Container<Step> implements Step {
         log.debug("Sending message to message proxy");
         Message responseMessage = messageProxy.proxyMessage(message);
 
-		if(size() > 0) {
-			log.debug("Processing response");
+        if(size() > 0) {
+            log.debug("Processing response");
 
-			for(Step step : getAll()) {
-				log.debug("Executing step '" + step.getId() + "'");
-				step.execute(responseMessage);
-			}
-		}
+            for(Step step : getAll()) {
+                log.debug("Executing step '{}'", step.getId());
+                step.execute(responseMessage);
+            }
+        }
     }
 }
