@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2017 Miles Talmey.
+ * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
+ */
 package com.emarte.regurgitator.extensions.web;
 
 import com.emarte.regurgitator.core.*;
@@ -72,7 +76,8 @@ class HttpGlobalUtil {
         if(GLOBAL_PARAMETERS.size() > 0) {
             log.debug("Adding global parameters to message");
             for (Object id : GLOBAL_PARAMETERS.keySet()) {
-                context.setValue(GLOBAL_PARAMETERS.get(id));
+                String stringId = (String) id;
+                context.setValue(GLOBAL_PARAMETERS.get(stringId));
             }
         }
     }

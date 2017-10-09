@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2017 Miles Talmey.
+ * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
+ */
 package com.emarte.regurgitator.extensions.web;
 
 import com.emarte.regurgitator.core.*;
@@ -113,7 +117,7 @@ public class HttpMessageProxy {
     private static void addHeaders(HttpMethod method, Parameters context) {
         for(Object id: context.ids()) {
             String value = stringify(context.getValue(id));
-            log.debug("Adding request header '{} with value '{}' to method", id, value);
+            log.debug("Adding request header '{}' with value '{}' to method", id, value);
             method.addRequestHeader(stringify(id), value);
         }
     }
