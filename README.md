@@ -130,24 +130,24 @@ below is an example web.xml for mapping all incoming http requests to ``Regurgit
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="2.4"
-		 xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-	<display-name>My Mocked Service</display-name>
+         xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    <display-name>My Mocked Service</display-name>
 
-	<servlet>
-		<servlet-name>RegurgitatorServlet</servlet-name>
-		<servlet-class>com.emarte.regurgitator.extensions.web.RegurgitatorServlet</servlet-class>
-		<init-param>
-			<param-name>config-location</param-name>
-			<param-value>classpath:/config.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
+    <servlet>
+        <servlet-name>RegurgitatorServlet</servlet-name>
+        <servlet-class>com.emarte.regurgitator.extensions.web.RegurgitatorServlet</servlet-class>
+        <init-param>
+            <param-name>config-location</param-name>
+            <param-value>classpath:/config.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
-	<servlet-mapping>
-		<servlet-name>RegurgitatorServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegurgitatorServlet</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
 </web-app>
 ```
 
