@@ -4,14 +4,16 @@
  */
 package com.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.*;
+import com.emarte.regurgitator.core.Message;
+import com.emarte.regurgitator.core.RegurgitatorException;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Map;
+import java.util.TreeMap;
 
 import static com.emarte.regurgitator.core.CoreTypes.STRING;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;

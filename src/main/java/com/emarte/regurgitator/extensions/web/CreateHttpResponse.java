@@ -6,7 +6,7 @@ package com.emarte.regurgitator.extensions.web;
 
 import com.emarte.regurgitator.core.*;
 
-import static com.emarte.regurgitator.core.CoreTypes.*;
+import static com.emarte.regurgitator.core.CoreTypes.NUMBER;
 import static com.emarte.regurgitator.core.Log.getLog;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 

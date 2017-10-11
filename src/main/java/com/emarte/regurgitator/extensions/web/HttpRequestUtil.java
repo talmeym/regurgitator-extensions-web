@@ -4,13 +4,16 @@
  */
 package com.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.*;
+import com.emarte.regurgitator.core.Log;
+import com.emarte.regurgitator.core.Message;
 
-import javax.servlet.http.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.Enumeration;
 
-import static com.emarte.regurgitator.core.CoreTypes.*;
+import static com.emarte.regurgitator.core.CoreTypes.NUMBER;
+import static com.emarte.regurgitator.core.CoreTypes.STRING;
 import static com.emarte.regurgitator.core.Log.getLog;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 

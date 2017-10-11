@@ -9,7 +9,8 @@ import org.apache.commons.httpclient.auth.AuthState;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
 import java.io.*;
-import java.util.*;
+import java.util.Map;
+import java.util.TreeMap;
 
 @SuppressWarnings({"deprecation"})
 class MyHttpMethod implements HttpMethod {

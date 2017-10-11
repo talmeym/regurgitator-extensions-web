@@ -6,11 +6,13 @@ package com.emarte.regurgitator.extensions.web;
 
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.auth.AuthState;
-import org.apache.commons.httpclient.methods.*;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
 import java.io.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @SuppressWarnings("deprecation")
 class MyPostMethod extends PostMethod {

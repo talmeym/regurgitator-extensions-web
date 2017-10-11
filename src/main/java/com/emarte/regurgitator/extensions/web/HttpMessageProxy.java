@@ -5,10 +5,12 @@
 package com.emarte.regurgitator.extensions.web;
 
 import com.emarte.regurgitator.core.*;
-import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.Header;
+import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.*;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import static com.emarte.regurgitator.core.CoreTypes.STRING;
 import static com.emarte.regurgitator.core.Log.getLog;
