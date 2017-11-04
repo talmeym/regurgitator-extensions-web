@@ -20,14 +20,14 @@ import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstant
 class HttpRequestUtil {
     private static final Log log = getLog(HttpRequestUtil.class);
 
-    static void applyRequestData(Message message, HttpServletRequest httpServletRequest) throws IOException {
-        addRequestHeaders(message, httpServletRequest);
-        addRequestMetadata(message, httpServletRequest);
+    static void applyRequestData(HttpServletRequest httpServletRequest, Message message) throws IOException {
+        addRequestHeaders(httpServletRequest, message);
+        addRequestMetadata(httpServletRequest, message);
         addRequestCookies(message, httpServletRequest);
-        addPayload(message, httpServletRequest);
+        addPayload(httpServletRequest, message);
     }
 
-    private static void addRequestMetadata(Message message, HttpServletRequest request) {
+    private static void addRequestMetadata(HttpServletRequest request, Message message) {
         log.debug("Adding metadata to message from http request");
         addStringParam(message, REQUEST_METADATA_CONTEXT, METHOD, request.getMethod());
         addStringParam(message, REQUEST_METADATA_CONTEXT, REQUEST_URI, request.getRequestURI());
@@ -54,12 +54,12 @@ class HttpRequestUtil {
         addStringParam(message, REQUEST_METADATA_CONTEXT, HTTP_SESSION_ID, request.getSession(true).getId());
     }
 
-    private static void addPayload(Message message, HttpServletRequest request) throws IOException {
+    private static void addPayload(HttpServletRequest request, Message message) throws IOException {
         log.debug("Adding payload to message from http request");
         addStringParam(message, REQUEST_PAYLOAD_CONTEXT, TEXT, getPayload(request));
     }
 
-    private static void addRequestHeaders(Message message, HttpServletRequest request) {
+    private static void addRequestHeaders(HttpServletRequest request, Message message) {
         Enumeration<String> headerNames = request.getHeaderNames();
 
         if(headerNames.hasMoreElements()) {

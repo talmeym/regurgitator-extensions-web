@@ -32,7 +32,7 @@ public class HttpMessageProxy {
         log.debug("Proxying message to '{}:{}'" + (username != null ? " with credentials for '" + username + "'": ""), clientWrapper.getHost(), clientWrapper.getPort());
         HttpMethod method = getMethod(message);
         setPath(method, message);
-        addHeaders(method, message.getContext(REQUEST_HEADERS_CONTEXT));
+        addHeaders(message.getContext(REQUEST_HEADERS_CONTEXT), method);
 
         try {
             log.debug("Executing method");
@@ -83,7 +83,6 @@ public class HttpMessageProxy {
         if(PUT.equals(method)) {
             log.debug("Using put method");
             PutMethod putMethod = clientWrapper.newPutMethod();
-
             Object payload = message.getContext(REQUEST_PAYLOAD_CONTEXT).getValue(TEXT);
 
             if(payload != null) {
@@ -116,7 +115,7 @@ public class HttpMessageProxy {
         }
     }
 
-    private static void addHeaders(HttpMethod method, Parameters context) {
+    private static void addHeaders(Parameters context, HttpMethod method) {
         for(Object id: context.ids()) {
             String value = stringify(context.getValue(id));
             log.debug("Adding request header '{}' with value '{}' to method", id, value);

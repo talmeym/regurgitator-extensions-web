@@ -43,4 +43,9 @@ public interface ExtensionsWebConfigConstants {
     String PUT = "PUT";
     String DELETE = "DELETE";
     String KEY = "key";
+    String HOST = "host";
+    String PORT = "port";
+    String USERNAME = "username";
+    String PASSWORD = "password";
+    String PATH_PREFIX = "path-prefix";
 }

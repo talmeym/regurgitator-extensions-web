@@ -69,10 +69,10 @@ public class RegurgitatorServlet extends HttpServlet implements HasId {
             log.debug("Creating new message");
             Message message = new Message(responseCallBack);
 
-            log.debug("Applying http request details to message");
-            applyRequestData(message, request);
+            log.debug("Applying http request data to message");
+            applyRequestData(request, message);
 
-            log.debug("Applying global details to message");
+            log.debug("Applying global data to message");
             applyGlobalData(message);
 
             log.debug("Sending message to regurgitator");
