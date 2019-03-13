@@ -100,8 +100,8 @@ public class HttpMessageProxyTest {
 
         private HttpMethod methodRequested;
 
-        public CollectingHttpClientWrapper(String responseBody, Map<String, String> responseHeaders, int statusCode) {
-            super("", -1, null, null);
+        CollectingHttpClientWrapper(String responseBody, Map<String, String> responseHeaders, int statusCode) {
+            super("http", "", -1, null, null);
             this.responseBody = responseBody;
             this.responseHeaders = responseHeaders;
             this.statusCode = statusCode;

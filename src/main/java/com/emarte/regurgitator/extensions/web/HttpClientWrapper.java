@@ -19,9 +19,9 @@ public class HttpClientWrapper {
     private final HttpClient httpClient;
     private String username;
 
-    public HttpClientWrapper(String host, int port, String username, String password) {
+    public HttpClientWrapper(String protocol, String host, int port, String username, String password) {
         httpClient = new HttpClient();
-        httpClient.setHostConfiguration(getHostConfiguration(host, port));
+        httpClient.setHostConfiguration(getHostConfiguration(protocol, host, port));
 
         if(username != null && password != null) {
             httpClient.getParams().setAuthenticationPreemptive(true);
@@ -65,9 +65,9 @@ public class HttpClientWrapper {
         return new DeleteMethod();
     }
 
-    private static HostConfiguration getHostConfiguration(String host, int port) {
+    private static HostConfiguration getHostConfiguration(String protocol, String host, int port) {
         HostConfiguration hostConfiguration = new HostConfiguration();
-        hostConfiguration.setHost(host, port);
+        hostConfiguration.setHost(host, port, protocol);
         return hostConfiguration;
     }
 }

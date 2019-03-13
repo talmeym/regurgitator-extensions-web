@@ -32,6 +32,7 @@ public class HttpMessageProxy {
         log.debug("Proxying message to '{}:{}'" + (username != null ? " with credentials for '" + username + "'": ""), clientWrapper.getHost(), clientWrapper.getPort());
         HttpMethod method = getMethod(message);
         setPath(method, message);
+        setQueryString(method, message);
         addHeaders(message.getContext(REQUEST_HEADERS_CONTEXT), method);
 
         try {
@@ -112,6 +113,15 @@ public class HttpMessageProxy {
         if(path != null) {
             log.debug("Setting method path to '{}'", path);
             method.setPath(path);
+        }
+    }
+
+    private static void setQueryString(HttpMethod method, Message message) {
+        String queryString = stringify(message.getContextValue(new ContextLocation(REQUEST_METADATA_CONTEXT, QUERY_STRING)));
+
+        if(queryString != null) {
+            log.debug("Setting method query string to '{}'", queryString);
+            method.setQueryString(queryString);
         }
     }
 
