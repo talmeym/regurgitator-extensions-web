@@ -7,7 +7,9 @@ package com.emarte.regurgitator.extensions.web;
 import com.emarte.regurgitator.core.*;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.methods.*;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.PutMethod;
+import org.apache.commons.httpclient.methods.StringRequestEntity;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

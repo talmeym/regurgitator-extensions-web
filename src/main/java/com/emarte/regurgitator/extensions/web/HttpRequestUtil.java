@@ -9,7 +9,9 @@ import com.emarte.regurgitator.core.Message;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Enumeration;
 
 import static com.emarte.regurgitator.core.CoreTypes.NUMBER;

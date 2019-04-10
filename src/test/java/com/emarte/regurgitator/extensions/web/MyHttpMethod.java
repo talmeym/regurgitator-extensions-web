@@ -8,7 +8,9 @@ import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.auth.AuthState;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 import java.util.TreeMap;
 
