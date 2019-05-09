@@ -71,10 +71,10 @@ class HttpGlobalUtil {
     }
 
     static void applyGlobalData(Message message) {
-        Parameters context = message.getContext(GLOBAL_METADATA_CONTEXT);
-
         if(GLOBAL_PARAMETERS.size() > 0) {
+            Parameters context = message.getContext(GLOBAL_METADATA_CONTEXT);
             log.debug("Adding global parameters to message");
+
             for (Object id : GLOBAL_PARAMETERS.keySet()) {
                 String stringId = (String) id;
                 context.setValue(GLOBAL_PARAMETERS.get(stringId));

@@ -38,7 +38,7 @@ public class RegurgitatorServlet extends HttpServlet implements HasId {
     }
 
     @Override
-    protected void service(HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
+    protected void service(HttpServletRequest request, final HttpServletResponse response) throws IOException {
         long start = System.currentTimeMillis();
 
         try {
@@ -61,7 +61,7 @@ public class RegurgitatorServlet extends HttpServlet implements HasId {
                         log.error("Error writing response text back from servlet", e);
                         try {
                             response.sendError(500, e + (e.getCause() != null ? ": " + e.getCause() : ""));
-                        } catch (IOException e1) {
+                        } catch (IOException ioe) {
                             // I tried
                         }
                     }

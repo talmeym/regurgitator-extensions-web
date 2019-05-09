@@ -8,10 +8,11 @@ public interface ExtensionsWebConfigConstants {
     String REQUEST_PAYLOAD_CONTEXT = "request-payload";
     String REQUEST_HEADERS_CONTEXT = "request-headers";
     String REQUEST_METADATA_CONTEXT = "request-metadata";
+    String REQUEST_COOKIES_CONTEXT = "request-cookies";
     String RESPONSE_PAYLOAD_CONTEXT = "response-payload";
     String RESPONSE_HEADERS_CONTEXT = "response-headers";
     String RESPONSE_METADATA_CONTEXT = "response-metadata";
-    String REQUEST_COOKIES_CONTEXT = "request-cookies";
+    String RESPONSE_COOKIES_CONTEXT = "response-cookies";
     String GLOBAL_METADATA_CONTEXT = "global-metadata";
     String SERVER_NAME = "server-name";
     String METHOD = "method";

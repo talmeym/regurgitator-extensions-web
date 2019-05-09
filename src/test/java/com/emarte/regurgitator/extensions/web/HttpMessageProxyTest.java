@@ -6,77 +6,82 @@ package com.emarte.regurgitator.extensions.web;
 
 import com.emarte.regurgitator.core.Message;
 import com.emarte.regurgitator.core.RegurgitatorException;
+import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 import static com.emarte.regurgitator.core.CoreTypes.STRING;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
+import static java.util.Arrays.asList;
 import static junit.framework.Assert.assertEquals;
 
 public class HttpMessageProxyTest {
-    private final CollectingHttpClientWrapper wrapper = getWrapper();
+    private final CollectingHttpClientWrapper wrapper = getWrapper(asList("cookie1", "cookie2"));
     private final HttpMessageProxy toTest = new HttpMessageProxy(wrapper);
 
     @Test
     public void testDefaults() throws RegurgitatorException {
+        CollectingHttpClientWrapper wrapper = getWrapper(new ArrayList<String>());
+        HttpMessageProxy toTest = new HttpMessageProxy(wrapper);
         Message response = toTest.proxyMessage(new Message(null));
         assertEquals("GET[null,request-headers={},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
-        assertEquals("message[response-metadata[status-code=200,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-payload[text=response body,],]", response.toString());
+        assertEquals("message[response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],response-payload[text=response body,],]", response.toString());
     }
 
     @Test
     public void testDefaultsPost() throws RegurgitatorException {
+        CollectingHttpClientWrapper wrapper = getWrapper(new ArrayList<String>());
+        HttpMessageProxy toTest = new HttpMessageProxy(wrapper);
         Message response = toTest.proxyMessage(buildDefaultPostMessage());
         assertEquals("POST[null,request-headers={},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
-        assertEquals("message[response-metadata[status-code=200,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-payload[text=response body,],]", response.toString());
+        assertEquals("message[response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],response-payload[text=response body,],]", response.toString());
     }
 
     @Test
     public void testGet() throws RegurgitatorException {
-        Message response = toTest.proxyMessage(buildMessage(GET));
+        Message response = toTest.proxyMessage(buildMessage(GET, asList("cookie1", "cookie2")));
         assertEquals("GET[/path/path,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
-        assertEquals("message[response-metadata[status-code=200,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-payload[text=response body,],]", response.toString());
+        assertEquals("message[response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],response-payload[text=response body,],]", response.toString());
     }
 
     @Test
     public void testPut() throws RegurgitatorException {
-        Message message = buildMessage(PUT);
+        Message message = buildMessage(PUT, asList("cookie1", "cookie2"));
         message.getContext(REQUEST_PAYLOAD_CONTEXT).setValue(TEXT, STRING, "request body");
         Message response = toTest.proxyMessage(message);
         assertEquals("PUT[/path/path,request-body=text/plain; charset=UTF-8:request body,request-headers={rqh2=rqv2, rqh1=rqv1},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
-        assertEquals("message[response-metadata[status-code=200,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-payload[text=response body,],]", response.toString());
+        assertEquals("message[response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],response-payload[text=response body,],]", response.toString());
     }
 
     @Test
     public void testPost() throws RegurgitatorException {
-        Message message = buildMessage(POST);
+        Message message = buildMessage(POST, asList("cookie1", "cookie2"));
         message.getContext(REQUEST_PAYLOAD_CONTEXT).setValue(TEXT, STRING, "request body");
         Message response = toTest.proxyMessage(message);
         assertEquals("POST[/path/path,request-body=text/plain; charset=UTF-8:request body,request-headers={rqh2=rqv2, rqh1=rqv1},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
-        assertEquals("message[response-metadata[status-code=200,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-payload[text=response body,],]", response.toString());
+        assertEquals("message[response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],response-payload[text=response body,],]", response.toString());
     }
 
     @Test
     public void testDelete() throws RegurgitatorException {
-        Message response = toTest.proxyMessage(buildMessage(DELETE));
+        Message response = toTest.proxyMessage(buildMessage(DELETE, asList("cookie1", "cookie2")));
         assertEquals("DELETE[/path/path,request-headers={rqh1=rqv1, rqh2=rqv2},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
-        assertEquals("message[response-metadata[status-code=200,],response-headers[rsh1=rsv1,rsh2=rsv2,],response-payload[text=response body,],]", response.toString());
+        assertEquals("message[response-headers[rsh1=rsv1,rsh2=rsv2,],response-metadata[status-code=200,],response-payload[text=response body,],]", response.toString());
     }
 
-    private CollectingHttpClientWrapper getWrapper() {
+    private CollectingHttpClientWrapper getWrapper(List<String> cookieNames) {
         TreeMap<String, String> responseHeaders = new TreeMap<String, String>();
         responseHeaders.put("rsh1", "rsv1");
         responseHeaders.put("rsh2", "rsv2");
-        return new CollectingHttpClientWrapper("response body", responseHeaders, 200);
+        return new CollectingHttpClientWrapper("response body", responseHeaders, 200, cookieNames);
     }
 
-    private Message buildMessage(String method) {
+    private Message buildMessage(String method, List<String> cookieNames) {
         Message message = new Message(null);
         message.getContext(REQUEST_METADATA_CONTEXT).setValue(METHOD, STRING, method);
         message.getContext(REQUEST_METADATA_CONTEXT).setValue(PATH_INFO, STRING, "/path/path");
@@ -84,6 +89,12 @@ public class HttpMessageProxyTest {
         message.getContext(REQUEST_METADATA_CONTEXT).setValue(CHARACTER_ENCODING, STRING, "UTF-8");
         message.getContext(REQUEST_HEADERS_CONTEXT).setValue("rqh1", STRING, "rqv1");
         message.getContext(REQUEST_HEADERS_CONTEXT).setValue("rqh2", STRING, "rqv2");
+
+        for(String cookieName: cookieNames) {
+            String value = CookieUtil.cookieToString(new Cookie(null, cookieName, "value"));
+            message.getContext(REQUEST_COOKIES_CONTEXT).setValue(cookieName, value);
+        }
+
         return message;
     }
 
@@ -97,14 +108,16 @@ public class HttpMessageProxyTest {
         private final String responseBody;
         private final Map<String, String> responseHeaders;
         private final int statusCode;
+        private final List<String> cookieNames;
 
         private HttpMethod methodRequested;
 
-        CollectingHttpClientWrapper(String responseBody, Map<String, String> responseHeaders, int statusCode) {
+        CollectingHttpClientWrapper(String responseBody, Map<String, String> responseHeaders, int statusCode, List<String> cookieNames) {
             super("http", "", -1, null, null);
             this.responseBody = responseBody;
             this.responseHeaders = responseHeaders;
             this.statusCode = statusCode;
+            this.cookieNames = cookieNames;
         }
 
         @Override
@@ -134,9 +147,19 @@ public class HttpMessageProxyTest {
         }
 
         @Override
-        public int executeMethod(HttpMethod method) throws IOException {
+        public int executeMethod(HttpMethod method, Cookie[] cookies) throws IOException {
             if(method != methodRequested) {
                 throw new IllegalArgumentException("wrong method");
+            }
+
+            if(cookies.length != cookieNames.size()) {
+                throw new IllegalArgumentException("wrong cookie quantity");
+            }
+
+            for(Cookie cookie: cookies) {
+                if(!cookieNames.contains(cookie.getName())) {
+                    throw new IllegalArgumentException("wrong cookie: " + cookie.getName());
+                }
             }
 
             return method.execute(null, null);

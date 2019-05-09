@@ -7,10 +7,13 @@ package com.emarte.regurgitator.extensions.web;
 import com.emarte.regurgitator.core.Log;
 import com.emarte.regurgitator.core.Message;
 import com.emarte.regurgitator.core.Parameters;
+import com.emarte.regurgitator.core.RegurgitatorException;
 
 import javax.servlet.http.HttpServletResponse;
 
 import static com.emarte.regurgitator.core.Log.getLog;
+import static com.emarte.regurgitator.core.StringType.stringify;
+import static com.emarte.regurgitator.extensions.web.CookieUtil.stringToHttpCookie;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 class HttpResponseUtil {
@@ -19,6 +22,7 @@ class HttpResponseUtil {
     static void applyResponseData(Message message, HttpServletResponse httpServletResponse) {
         addResponseHeaders(message, httpServletResponse);
         addResponseMetadata(message, httpServletResponse);
+        addResponseCookies(message, httpServletResponse);
     }
 
     private static void addResponseHeaders(Message message, HttpServletResponse response) {
@@ -30,7 +34,7 @@ class HttpResponseUtil {
             for (Object id : context.ids()) {
                 Object value = context.getValue(id);
                 log.debug("Setting header '{}' to value '{}'", id, value);
-                response.addHeader(String.valueOf(id), value.toString());
+                response.addHeader(stringify(id), stringify(value));
             }
         }
     }
@@ -64,6 +68,25 @@ class HttpResponseUtil {
                 Object value = context.getValue(CONTENT_LENGTH);
                 log.debug("Setting content length to '{}'", value);
                 httpServletResponse.setContentLength(objToInt(value));
+            }
+        }
+    }
+
+    private static void addResponseCookies(Message message, HttpServletResponse httpServletResponse) {
+        Parameters context = message.getContext(RESPONSE_COOKIES_CONTEXT);
+
+        if(context.size() > 0) {
+            log.debug("Adding cookies to http response from message");
+
+            for (Object id : context.ids()) {
+                try {
+                    Object value = context.getValue(id);
+                    log.debug("Adding cookie '{}' with value '{}'", id, value);
+                    httpServletResponse.addCookie(stringToHttpCookie(stringify(value)));
+                } catch (RegurgitatorException e) {
+                    log.error("Error parsing cookie for http response", e);
+                }
+
             }
         }
     }

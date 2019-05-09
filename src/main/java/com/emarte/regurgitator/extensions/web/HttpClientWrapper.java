@@ -5,54 +5,76 @@
 package com.emarte.regurgitator.extensions.web;
 
 import com.emarte.regurgitator.core.Log;
-import org.apache.commons.httpclient.HostConfiguration;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
+import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.methods.DeleteMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.emarte.regurgitator.core.Log.getLog;
+import static java.util.Arrays.asList;
 import static org.apache.commons.httpclient.auth.AuthScope.ANY;
 
-public class HttpClientWrapper {
+class HttpClientWrapper {
     private static final Log log = getLog(HttpClientWrapper.class);
 
-    private final HttpClient httpClient;
-    private String username;
+    private final HostConfiguration hostConfiguration;
+    private final UsernamePasswordCredentials credentials;
+    private ThreadLocal<List<Cookie>> threadLocalCookies = new ThreadLocal<List<Cookie>>();
 
-    public HttpClientWrapper(String protocol, String host, int port, String username, String password) {
-        httpClient = new HttpClient();
-        httpClient.setHostConfiguration(getHostConfiguration(protocol, host, port));
-
-        if(username != null && password != null) {
-            httpClient.getParams().setAuthenticationPreemptive(true);
-            httpClient.getState().setCredentials(ANY, new UsernamePasswordCredentials(username, password));
-            this.username = username;
-        }
+    HttpClientWrapper(String protocol, String host, int port, String username, String password) {
+        hostConfiguration = getHostConfiguration(protocol, host, port);
+        credentials = username != null && password != null ? new UsernamePasswordCredentials(username, password) : null;
     }
 
     public String getHost() {
-        return httpClient.getHostConfiguration().getHost();
+        return hostConfiguration.getHost();
     }
 
     public int getPort() {
-        return httpClient.getHostConfiguration().getPort();
+        return hostConfiguration.getPort();
     }
 
     public String getUsername() {
-        return username;
+        return credentials != null ? credentials.getUserName() : null;
     }
 
-    public int executeMethod(HttpMethod method) throws IOException {
-        String host = getHost();
-        log.debug("overriding host header with value '{}'", host);
-        method.setRequestHeader("host", host);
-        return httpClient.executeMethod(method);
+    int executeMethod(HttpMethod method, Cookie[] cookies) throws IOException {
+        log.debug("Creating new http client");
+        HttpClient httpClient = new HttpClient();
+        log.debug("Setting host credential");
+        httpClient.setHostConfiguration(hostConfiguration);
+
+        if(credentials != null) {
+            log.debug("Setting user credentials");
+            httpClient.getState().setCredentials(ANY, credentials);
+        }
+
+        log.debug("Overriding host header with value '{}'", hostConfiguration.getHost());
+        method.setRequestHeader("host", hostConfiguration.getHost());
+        log.debug("Adding {} cookies", cookies.length);
+        httpClient.getState().addCookies(cookies);
+        log.debug("Making call");
+        int statusCode = httpClient.executeMethod(method);
+        log.debug("Status code {} received", statusCode);
+
+        List<Cookie> afterCookies = asList(httpClient.getState().getCookies());
+        List<Cookie> lastCookies = threadLocalCookies.get();
+
+        if(lastCookies == null) {
+            lastCookies = new ArrayList<Cookie>();
+            threadLocalCookies.set(lastCookies);
+        }
+
+        lastCookies.clear();
+        lastCookies.addAll(afterCookies);
+        lastCookies.removeAll(asList(cookies));
+        log.debug("{} new / modified cookies received", lastCookies.size());
+        return statusCode;
     }
 
     public HttpMethod newGetMethod() {
@@ -69,6 +91,10 @@ public class HttpClientWrapper {
 
     public HttpMethod newDeleteMethod() {
         return new DeleteMethod();
+    }
+
+    public List<Cookie> getLastCookies() {
+        return threadLocalCookies.get();
     }
 
     private static HostConfiguration getHostConfiguration(String protocol, String host, int port) {

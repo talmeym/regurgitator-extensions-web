@@ -5,6 +5,7 @@
 package com.emarte.regurgitator.extensions.web;
 
 import com.emarte.regurgitator.core.*;
+import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -13,14 +14,17 @@ import org.apache.commons.httpclient.methods.StringRequestEntity;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import static com.emarte.regurgitator.core.CoreTypes.STRING;
 import static com.emarte.regurgitator.core.Log.getLog;
 import static com.emarte.regurgitator.core.StringType.stringify;
+import static com.emarte.regurgitator.extensions.web.CookieUtil.cookieToString;
+import static com.emarte.regurgitator.extensions.web.CookieUtil.stringToCookie;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 import static java.lang.String.valueOf;
 
-public class HttpMessageProxy {
+class HttpMessageProxy {
     private static final Log log = getLog(HttpMessageProxy.class);
     private final HttpClientWrapper clientWrapper;
 
@@ -39,12 +43,13 @@ public class HttpMessageProxy {
 
         try {
             log.debug("Executing method");
-            int status = clientWrapper.executeMethod(method);
+            int status = clientWrapper.executeMethod(method, getCookies(message.getContext(REQUEST_COOKIES_CONTEXT)));
             log.debug("Creating new message");
             Message newMessage = new Message(message, true, true);
             setStatusCode(status, newMessage);
             setPayload(method, newMessage);
             addHeaders(method, newMessage);
+            addCookies(clientWrapper, newMessage);
             method.releaseConnection();
             return newMessage;
         } catch (IOException e) {
@@ -135,6 +140,20 @@ public class HttpMessageProxy {
         }
     }
 
+    private Cookie[] getCookies(Parameters context) throws RegurgitatorException {
+        List<Object> ids = context.ids();
+        Cookie[] cookies = new Cookie[ids.size()];
+
+        for(int i = 0; i < ids.size(); i++) {
+            Object id = ids.get(i);
+            Object value = context.getValue(id);
+            log.debug("Adding request cookie '{}' with value '{}' to method", id, value);
+            cookies[i] = stringToCookie(stringify(value));
+        }
+
+        return cookies;
+    }
+
     private static void setStatusCode(int status, Message message) {
         log.debug("Setting response status code to '{}'", status);
         message.getContext(RESPONSE_METADATA_CONTEXT).setValue(STATUS_CODE, STRING, valueOf(status));
@@ -165,6 +184,19 @@ public class HttpMessageProxy {
 
             for(Header header : responseHeaders) {
                 context.setValue(header.getName(), STRING, header.getValue());
+            }
+        }
+    }
+
+    private static void addCookies(HttpClientWrapper wrapper, Message message) {
+        List<Cookie> lastCookies = wrapper.getLastCookies();
+
+        if(lastCookies != null && lastCookies.size() > 0) {
+            log.debug("Adding response cookies");
+            Parameters context = message.getContext(RESPONSE_COOKIES_CONTEXT);
+
+            for(Cookie cookie: lastCookies) {
+                context.setValue(cookie.getName(), STRING, cookieToString(cookie));
             }
         }
     }

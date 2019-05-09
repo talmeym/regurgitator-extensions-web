@@ -17,6 +17,7 @@ import java.util.Enumeration;
 import static com.emarte.regurgitator.core.CoreTypes.NUMBER;
 import static com.emarte.regurgitator.core.CoreTypes.STRING;
 import static com.emarte.regurgitator.core.Log.getLog;
+import static com.emarte.regurgitator.extensions.web.CookieUtil.httpCookieToString;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 class HttpRequestUtil {
@@ -25,7 +26,7 @@ class HttpRequestUtil {
     static void applyRequestData(HttpServletRequest httpServletRequest, Message message) throws IOException {
         addRequestHeaders(httpServletRequest, message);
         addRequestMetadata(httpServletRequest, message);
-        addRequestCookies(message, httpServletRequest);
+        addRequestCookies(httpServletRequest, message);
         addPayload(httpServletRequest, message);
     }
 
@@ -57,8 +58,12 @@ class HttpRequestUtil {
     }
 
     private static void addPayload(HttpServletRequest request, Message message) throws IOException {
-        log.debug("Adding payload to message from http request");
-        addStringParam(message, REQUEST_PAYLOAD_CONTEXT, TEXT, getPayload(request));
+        String payload = getPayload(request);
+
+        if(payload.length() > 0) {
+            log.debug("Adding payload to message from http request");
+            message.getContext(REQUEST_PAYLOAD_CONTEXT).setValue(TEXT, STRING, payload);
+        }
     }
 
     private static void addRequestHeaders(HttpServletRequest request, Message message) {
@@ -75,16 +80,14 @@ class HttpRequestUtil {
         }
     }
 
-    private static void addRequestCookies(Message message, HttpServletRequest request) {
+    private static void addRequestCookies(HttpServletRequest request, Message message) {
         Cookie[] cookies = request.getCookies();
 
-        if(cookies != null) {
+        if(cookies != null && cookies.length > 0) {
             log.debug("Adding cookies to message from http request");
 
             for(Cookie cookie: cookies) {
-                String name = cookie.getName();
-                String value = cookie.getValue();
-                addStringParam(message, REQUEST_COOKIES_CONTEXT, name, value);
+                addStringParam(message, REQUEST_COOKIES_CONTEXT, cookie.getName(), httpCookieToString(cookie));
             }
         }
     }
