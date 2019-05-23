@@ -58,9 +58,11 @@ class HttpClientWrapper {
         method.setRequestHeader("host", hostConfiguration.getHost());
         log.debug("Adding {} cookies", cookies.length);
         httpClient.getState().addCookies(cookies);
-        log.debug("Making call");
+        log.debug("Making http call");
+        long start = System.currentTimeMillis();
         int statusCode = httpClient.executeMethod(method);
-        log.debug("Status code {} received", statusCode);
+        long end = System.currentTimeMillis();
+        log.debug("Status code {} received in {} milliseconds", statusCode, end - start);
 
         List<Cookie> afterCookies = asList(httpClient.getState().getCookies());
         List<Cookie> lastCookies = threadLocalCookies.get();
