@@ -19,6 +19,7 @@ import static java.lang.Integer.parseInt;
 class CookieUtil {
     private static final String PATTERN = "domain={0};name={1};value={2};path={3};expiryDate={4};secure={5};comment={6};version={7};";
     private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    private static final int DEFAULT_VERSION = 0;
 
     static String httpCookieToString(javax.servlet.http.Cookie cookie) {
         return cookieToString(httpCookieToCookie(cookie));
@@ -47,11 +48,11 @@ class CookieUtil {
             SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
             final Cookie cookie =
                     new Cookie(
-                            nullSafe(stringify(objects[0])),
+                            nullStringSafe(stringify(objects[0])),
                             stringify(objects[1]),
                             stringify(objects[2]),
-                            nullSafe(stringify(objects[3])),
-                            nullSafe(stringify(objects[4])) != null ? dateFormat.parse(stringify(objects[4])) : null,
+                            nullStringSafe(stringify(objects[3])),
+                            nullStringSafe(stringify(objects[4])) != null ? dateFormat.parse(stringify(objects[4])) : null,
                             parseBoolean(stringify(objects[5]))
                     );
 
@@ -59,7 +60,7 @@ class CookieUtil {
                 cookie.setComment(stringify(objects[6]));
             }
 
-            if (objects[7] != null && !Integer.valueOf(0).equals(objects[7])) {
+            if (objects[7] != null && !Integer.valueOf(DEFAULT_VERSION).equals(objects[7])) {
                 cookie.setVersion(parseInt(stringify(objects[7])));
             }
 
@@ -79,24 +80,31 @@ class CookieUtil {
         if(cookie.getDomain() != null) {
             httpCookie.setDomain(cookie.getDomain());
         }
+
         if(cookie.getPath() != null) {
             httpCookie.setPath(cookie.getPath());
         }
+
         if(cookie.getExpiryDate() != null) {
             httpCookie.setMaxAge((int) ((cookie.getExpiryDate().getTime() - System.currentTimeMillis()) / 1000L));
         }
 
-        httpCookie.setSecure(cookie.getSecure());
+        if(cookie.getSecure()) {
+            httpCookie.setSecure(cookie.getSecure());
+        }
 
         if(cookie.getComment() != null) {
             httpCookie.setComment(cookie.getComment());
         }
 
-        httpCookie.setVersion(cookie.getVersion());
+        if(cookie.getVersion() != DEFAULT_VERSION) {
+            httpCookie.setVersion(cookie.getVersion());
+        }
+
         return httpCookie;
     }
 
-    private static String nullSafe(String string) {
+    private static String nullStringSafe(String string) {
         if (!"null".equals(string)) {
             return string;
         }
