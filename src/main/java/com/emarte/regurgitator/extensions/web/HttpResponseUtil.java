@@ -45,7 +45,6 @@ class HttpResponseUtil {
         if(context.size() > 0) {
             log.debug("Adding metadata to http response from message");
 
-
             if (context.contains(STATUS_CODE)) {
                 Object value = context.getValue(STATUS_CODE);
                 log.debug("Setting status code '{}'", value);
