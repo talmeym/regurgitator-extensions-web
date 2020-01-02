@@ -24,7 +24,7 @@ class HttpClientWrapper {
 
     private final HostConfiguration hostConfiguration;
     private final UsernamePasswordCredentials credentials;
-    private ThreadLocal<List<Cookie>> threadLocalCookies = new ThreadLocal<List<Cookie>>();
+    private final ThreadLocal<List<Cookie>> threadLocalCookies = new ThreadLocal<List<Cookie>>();
 
     HttpClientWrapper(String protocol, String host, int port, String username, String password) {
         hostConfiguration = getHostConfiguration(protocol, host, port);

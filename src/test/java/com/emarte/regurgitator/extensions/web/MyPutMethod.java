@@ -63,12 +63,12 @@ class MyPutMethod extends PutMethod {
     }
 
     @Override
-    public URI getURI() throws URIException {
+    public URI getURI() {
         throw exception;
     }
 
     @Override
-    public void setURI(URI uri) throws URIException {
+    public void setURI(URI uri) {
         throw exception;
     }
 
@@ -194,17 +194,17 @@ class MyPutMethod extends PutMethod {
     }
 
     @Override
-    public byte[] getResponseBody() throws IOException {
+    public byte[] getResponseBody() {
         return responseBody.getBytes();
     }
 
     @Override
-    public String getResponseBodyAsString() throws IOException {
+    public String getResponseBodyAsString() {
         return responseBody;
     }
 
     @Override
-    public InputStream getResponseBodyAsStream() throws IOException {
+    public InputStream getResponseBodyAsStream() {
         return new ByteArrayInputStream(responseBody.getBytes());
     }
 
@@ -214,7 +214,7 @@ class MyPutMethod extends PutMethod {
     }
 
     @Override
-    public int execute(HttpState state, HttpConnection connection) throws IOException {
+    public int execute(HttpState state, HttpConnection connection) {
         return statusCode;
     }
 

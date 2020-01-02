@@ -6,7 +6,6 @@ package com.emarte.regurgitator.extensions.web;
 
 import com.emarte.regurgitator.core.Log;
 import com.emarte.regurgitator.core.Message;
-import com.emarte.regurgitator.core.RegurgitatorException;
 import com.emarte.regurgitator.core.ValueProcessor;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class QueryParamProcessor implements ValueProcessor {
     }
 
     @Override
-    public Object process(Object value, Message message) throws RegurgitatorException {
+    public Object process(Object value, Message message) {
         List<String> results = new ArrayList<String>();
 
         for(String part: stringify(value).split("&")) {

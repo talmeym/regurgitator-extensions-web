@@ -9,7 +9,6 @@ import org.apache.commons.httpclient.auth.AuthState;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.TreeMap;
@@ -54,12 +53,12 @@ class MyHttpMethod implements HttpMethod {
     }
 
     @Override
-    public URI getURI() throws URIException {
+    public URI getURI() {
         throw exception;
     }
 
     @Override
-    public void setURI(URI uri) throws URIException {
+    public void setURI(URI uri) {
         throw exception;
     }
 
@@ -195,17 +194,17 @@ class MyHttpMethod implements HttpMethod {
     }
 
     @Override
-    public byte[] getResponseBody() throws IOException {
+    public byte[] getResponseBody() {
         return responseBody.getBytes();
     }
 
     @Override
-    public String getResponseBodyAsString() throws IOException {
+    public String getResponseBodyAsString() {
         return responseBody;
     }
 
     @Override
-    public InputStream getResponseBodyAsStream() throws IOException {
+    public InputStream getResponseBodyAsStream() {
         return new ByteArrayInputStream(responseBody.getBytes());
     }
 
@@ -215,7 +214,7 @@ class MyHttpMethod implements HttpMethod {
     }
 
     @Override
-    public int execute(HttpState state, HttpConnection connection) throws IOException {
+    public int execute(HttpState state, HttpConnection connection) {
         return statusCode;
     }
 

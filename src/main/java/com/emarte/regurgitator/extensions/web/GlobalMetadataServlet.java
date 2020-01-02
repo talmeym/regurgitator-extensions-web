@@ -41,7 +41,7 @@ public class GlobalMetadataServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String name = req.getParameter(NAME);
 
         if(name != null && name.length() > 0) {
@@ -90,7 +90,7 @@ public class GlobalMetadataServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String name = req.getParameter(NAME);
         String type = req.getParameter(TYPE);
         String value = req.getParameter(VALUE);
@@ -105,7 +105,7 @@ public class GlobalMetadataServlet extends HttpServlet {
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String name = req.getParameter(NAME);
 
         if(name != null && name.length() > 0) {
