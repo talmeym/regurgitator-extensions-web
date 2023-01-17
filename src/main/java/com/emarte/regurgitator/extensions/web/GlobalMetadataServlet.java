@@ -68,6 +68,7 @@ public class GlobalMetadataServlet extends HttpServlet {
 
         if(parameter != null) {
             sendMessage(parameterString(parameter), resp);
+            return;
         }
 
         sendMessage("parameter not found", 400, resp);
@@ -95,8 +96,13 @@ public class GlobalMetadataServlet extends HttpServlet {
         String type = req.getParameter(TYPE);
         String value = req.getParameter(VALUE);
 
+        if(name == null || value == null) {
+            sendMessage("name and value required", 400, resp);
+            return;
+        }
+
         try {
-            ParameterType parameterType = type != null ? parameterType(type) : CoreTypes.STRING;
+            ParameterType<?> parameterType = type != null ? parameterType(type) : CoreTypes.STRING;
             setGlobalParameter(name, parameterType, value);
             sendMessage("parameter set", resp);
         } catch (RegurgitatorException e) {
@@ -113,6 +119,7 @@ public class GlobalMetadataServlet extends HttpServlet {
 
             if(deleted) {
                 sendMessage("parameter removed", resp);
+                return;
             }
 
             sendMessage("parameter not found", 400, resp);

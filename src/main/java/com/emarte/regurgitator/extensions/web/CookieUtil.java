@@ -19,6 +19,7 @@ import static java.lang.Integer.parseInt;
 class CookieUtil {
     private static final String PATTERN = "domain={0};name={1};value={2};path={3};expiryDate={4};secure={5};comment={6};version={7};";
     private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    private static final String NULL = "null";
     private static final int DEFAULT_VERSION = 0;
 
     static String httpCookieToString(javax.servlet.http.Cookie cookie) {
@@ -56,7 +57,7 @@ class CookieUtil {
                             parseBoolean(stringify(objects[5]))
                     );
 
-            if (objects[3] != null && !"null".equals(objects[6])) {
+            if (objects[3] != null && !NULL.equals(objects[6])) {
                 cookie.setComment(stringify(objects[6]));
             }
 
@@ -105,7 +106,7 @@ class CookieUtil {
     }
 
     private static String nullStringSafe(String string) {
-        if (!"null".equals(string)) {
+        if (!NULL.equals(string)) {
             return string;
         }
 
