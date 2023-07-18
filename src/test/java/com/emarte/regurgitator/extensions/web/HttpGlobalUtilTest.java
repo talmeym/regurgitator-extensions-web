@@ -32,7 +32,7 @@ public class HttpGlobalUtilTest {
         assertParameter("list_string", Arrays.asList("string 1", "string 2"), CoreTypes.LIST_OF_STRING, parameters);
     }
 
-    private void assertParameter(String name, Object value, ParameterType type, Collection<Parameter> parameters) throws Exception {
+    private void assertParameter(String name, Object value, ParameterType<?> type, Collection<Parameter> parameters) throws Exception {
         for(Parameter parameter: parameters) {
             if(parameter.getName().equals(name)) {
                 assertEquals(value, parameter.getValue());

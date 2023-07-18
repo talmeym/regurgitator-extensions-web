@@ -17,7 +17,7 @@ class HttpGlobalUtil {
     private static final Log log = getLog(HttpGlobalUtil.class);
     private static final Map<String, Parameter> GLOBAL_PARAMETERS = new HashMap<String, Parameter>();
 
-    static void setGlobalParameter(String name, ParameterType type, Object value) {
+    static void setGlobalParameter(String name, ParameterType<?> type, Object value) {
         log.debug("Setting global parameter '{}'", name);
         GLOBAL_PARAMETERS.put(name, new Parameter(new ParameterPrototype(name, type, REPLACE), type.convert(value)));
     }
@@ -41,7 +41,7 @@ class HttpGlobalUtil {
     static void addGlobalParametersFromProperties(String location, Properties properties) throws RegurgitatorException {
         log.debug("Loading global parameters from '{}'", location);
         HashMap<String, String> values = new HashMap<String, String>();
-        HashMap<String, ParameterType> types = new HashMap<String, ParameterType>();
+        HashMap<String, ParameterType<?>> types = new HashMap<String, ParameterType<?>>();
 
         for(Enumeration<String> enumeration = (Enumeration<String>) properties.propertyNames(); enumeration.hasMoreElements(); ) {
             String entry = enumeration.nextElement();
@@ -75,9 +75,8 @@ class HttpGlobalUtil {
             Parameters context = message.getContext(GLOBAL_METADATA_CONTEXT);
             log.debug("Adding global parameters to message");
 
-            for (Object id : GLOBAL_PARAMETERS.keySet()) {
-                String stringId = (String) id;
-                context.setValue(GLOBAL_PARAMETERS.get(stringId));
+            for (String id : GLOBAL_PARAMETERS.keySet()) {
+                context.setValue(GLOBAL_PARAMETERS.get(id));
             }
         }
     }
