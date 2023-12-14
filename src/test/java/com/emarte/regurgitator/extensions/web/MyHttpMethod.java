@@ -13,11 +13,10 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.TreeMap;
 
-@SuppressWarnings({"deprecation"})
 class MyHttpMethod implements HttpMethod {
     private final String name;
     private String path;
-    private final Map<String, String> requestHeaders = new TreeMap<String, String>();
+    private final Map<String, String> requestHeaders = new TreeMap<>();
     private final String responseBody;
     private final Map<String, String> responseHeaders;
     private final int statusCode;

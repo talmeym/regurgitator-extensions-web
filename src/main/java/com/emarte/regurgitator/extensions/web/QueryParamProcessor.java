@@ -25,7 +25,7 @@ public class QueryParamProcessor implements ValueProcessor {
 
     @Override
     public Object process(Object value, Message message) {
-        List<String> results = new ArrayList<String>();
+        List<String> results = new ArrayList<>();
 
         for(String part: stringify(value).split("&")) {
             String[] split = part.split("=");

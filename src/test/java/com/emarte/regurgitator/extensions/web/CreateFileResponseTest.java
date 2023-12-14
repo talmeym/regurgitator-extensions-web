@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.RESPONSE_METADATA_CONTEXT;
 import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.STATUS_CODE;
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class CreateFileResponseTest {
     private final CreateFileResponse toTest = new CreateFileResponse("id", new ValueSource(new ContextLocation("file-path"), null), null);
@@ -66,7 +66,7 @@ public class CreateFileResponseTest {
         assertEquals("assets file value", callback.getValue());
     }
 
-    private class CollectingResponseCallBack implements ResponseCallBack {
+    private static class CollectingResponseCallBack implements ResponseCallBack {
         private Object value;
 
         @Override

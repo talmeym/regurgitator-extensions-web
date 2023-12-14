@@ -44,30 +44,27 @@ public class RegurgitatorServlet extends HttpServlet implements HasId {
         try {
             log.debug("Accepting new http request");
 
-            ResponseCallBack responseCallBack = new ResponseCallBack() {
-                @Override
-                public void respond(Message message, Object value) {
-                    log.debug("Processing callback");
-                    log.debug("Applying message data to http response");
-                    applyResponseData(message, response);
+            ResponseCallBack responseCallBack = (message, value) -> {
+                log.debug("Processing callback");
+                log.debug("Applying message data to http response");
+                applyResponseData(message, response);
 
-                    log.debug("Writing back response payload");
+                log.debug("Writing back response payload");
+                try {
+                    ServletOutputStream outputStream = response.getOutputStream();
+                    outputStream.write(stringify(value).getBytes());
+                    outputStream.flush();
+                    outputStream.close();
+                } catch (IOException e) {
+                    log.error("Error writing response text back from servlet", e);
                     try {
-                        ServletOutputStream outputStream = response.getOutputStream();
-                        outputStream.write(stringify(value).getBytes());
-                        outputStream.flush();
-                        outputStream.close();
-                    } catch (IOException e) {
-                        log.error("Error writing response text back from servlet", e);
-                        try {
-                            response.sendError(500, e + (e.getCause() != null ? ": " + e.getCause() : ""));
-                        } catch (IOException ioe) {
-                            // I tried
-                        }
+                        response.sendError(500, e + (e.getCause() != null ? ": " + e.getCause() : ""));
+                    } catch (IOException ioe) {
+                        // I tried
                     }
-
-                    log.debug("Callback processing complete");
                 }
+
+                log.debug("Callback processing complete");
             };
 
             log.debug("Creating new message");

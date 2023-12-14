@@ -15,7 +15,7 @@ import java.util.Properties;
 
 import static com.emarte.regurgitator.core.FileUtil.getInputStreamForFile;
 import static com.emarte.regurgitator.extensions.web.HttpGlobalUtil.addGlobalParametersFromProperties;
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class HttpGlobalUtilTest {
     @Test
