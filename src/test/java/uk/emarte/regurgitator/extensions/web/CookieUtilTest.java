@@ -2,14 +2,14 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.RegurgitatorException;
+import uk.emarte.regurgitator.core.RegurgitatorException;
 import org.apache.commons.httpclient.Cookie;
 import org.junit.Test;
 
-import static com.emarte.regurgitator.extensions.web.CookieUtil.cookieToString;
-import static com.emarte.regurgitator.extensions.web.CookieUtil.stringToCookie;
+import static uk.emarte.regurgitator.extensions.web.CookieUtil.cookieToString;
+import static uk.emarte.regurgitator.extensions.web.CookieUtil.stringToCookie;
 import static org.junit.Assert.*;
 
 public class CookieUtilTest {

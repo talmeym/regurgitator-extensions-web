@@ -2,23 +2,23 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.Message;
-import com.emarte.regurgitator.core.RegurgitatorException;
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.junit.Test;
+import uk.emarte.regurgitator.core.Message;
+import uk.emarte.regurgitator.core.RegurgitatorException;
 
 import java.io.IOException;
 import java.util.*;
 
-import static com.emarte.regurgitator.core.CoreTypes.STRING;
-import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 import static java.util.Arrays.asList;
 import static junit.framework.Assert.assertEquals;
+import static uk.emarte.regurgitator.core.CoreTypes.STRING;
+import static uk.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 public class HttpMessageProxyTest {
     private final CollectingHttpClientWrapper wrapper = getWrapper(asList("cookie1", "cookie2"));

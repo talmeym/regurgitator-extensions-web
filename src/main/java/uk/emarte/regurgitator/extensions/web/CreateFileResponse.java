@@ -2,18 +2,18 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.*;
+import uk.emarte.regurgitator.core.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static com.emarte.regurgitator.core.CoreTypes.NUMBER;
-import static com.emarte.regurgitator.core.FileUtil.*;
-import static com.emarte.regurgitator.core.StringType.stringify;
-import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.RESPONSE_METADATA_CONTEXT;
-import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.STATUS_CODE;
+import static uk.emarte.regurgitator.core.CoreTypes.NUMBER;
+import static uk.emarte.regurgitator.core.FileUtil.*;
+import static uk.emarte.regurgitator.core.StringType.stringify;
+import static uk.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.RESPONSE_METADATA_CONTEXT;
+import static uk.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.STATUS_CODE;
 
 public class CreateFileResponse extends Identifiable implements Step {
     private static final Log log = Log.getLog(CreateFileResponse.class);

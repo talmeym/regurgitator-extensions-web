@@ -2,9 +2,9 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.Log;
+import uk.emarte.regurgitator.core.Log;
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.methods.DeleteMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.emarte.regurgitator.core.Log.getLog;
+import static uk.emarte.regurgitator.core.Log.getLog;
 import static java.util.Arrays.asList;
 import static org.apache.commons.httpclient.auth.AuthScope.ANY;
 

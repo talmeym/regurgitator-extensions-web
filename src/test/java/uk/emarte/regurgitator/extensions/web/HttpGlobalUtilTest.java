@@ -2,20 +2,20 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.CoreTypes;
-import com.emarte.regurgitator.core.Parameter;
-import com.emarte.regurgitator.core.ParameterType;
 import org.junit.Test;
+import uk.emarte.regurgitator.core.CoreTypes;
+import uk.emarte.regurgitator.core.Parameter;
+import uk.emarte.regurgitator.core.ParameterType;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Properties;
 
-import static com.emarte.regurgitator.core.FileUtil.getInputStreamForFile;
-import static com.emarte.regurgitator.extensions.web.HttpGlobalUtil.addGlobalParametersFromProperties;
 import static junit.framework.Assert.assertEquals;
+import static uk.emarte.regurgitator.core.FileUtil.getInputStreamForFile;
+import static uk.emarte.regurgitator.extensions.web.HttpGlobalUtil.addGlobalParametersFromProperties;
 
 public class HttpGlobalUtilTest {
     @Test

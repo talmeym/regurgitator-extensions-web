@@ -2,16 +2,16 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.*;
+import uk.emarte.regurgitator.core.*;
 
 import java.util.*;
 
-import static com.emarte.regurgitator.core.ConflictPolicy.REPLACE;
-import static com.emarte.regurgitator.core.EntityLookup.parameterType;
-import static com.emarte.regurgitator.core.Log.getLog;
-import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.GLOBAL_METADATA_CONTEXT;
+import static uk.emarte.regurgitator.core.ConflictPolicy.REPLACE;
+import static uk.emarte.regurgitator.core.EntityLookup.parameterType;
+import static uk.emarte.regurgitator.core.Log.getLog;
+import static uk.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.GLOBAL_METADATA_CONTEXT;
 
 class HttpGlobalUtil {
     private static final Log log = getLog(HttpGlobalUtil.class);
