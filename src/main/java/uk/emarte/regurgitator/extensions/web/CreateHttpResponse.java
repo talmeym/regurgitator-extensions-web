@@ -2,13 +2,13 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.*;
+import uk.emarte.regurgitator.core.*;
 
-import static com.emarte.regurgitator.core.CoreTypes.NUMBER;
-import static com.emarte.regurgitator.core.Log.getLog;
-import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
+import static uk.emarte.regurgitator.core.CoreTypes.NUMBER;
+import static uk.emarte.regurgitator.core.Log.getLog;
+import static uk.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 public class CreateHttpResponse extends Identifiable implements Step {
     private final Log log = getLog(this);

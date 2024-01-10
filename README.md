@@ -7,8 +7,8 @@ start your reading here: [regurgitator-all](http://github.com/talmeym/regurgitat
 ## regurgitator over http
 
 regurgitator allows the mocking of http services, using the following deployable servlets:
-- ``com.emarte.regurgitator.extensions.web.RegurgitatorServlet`` accepts http requests, passes them to regurgitator as messages, returns configured http responses
-- ``com.emarte.regurgitator.extensions.web.GlobalMetadataServlet`` allows the setting of global parameters, to be applied to incoming messages before processing
+- ``uk.emarte.regurgitator.extensions.web.RegurgitatorServlet`` accepts http requests, passes them to regurgitator as messages, returns configured http responses
+- ``uk.emarte.regurgitator.extensions.web.GlobalMetadataServlet`` allows the setting of global parameters, to be applied to incoming messages before processing
 
 ### regurgitator servlet
 
@@ -82,7 +82,7 @@ the following http calls can be used to set and get parameters:
 
 ```
 req: GET /?name=player-name 
-res: 200 player-name=Miles [com.emarte.regurgitator.core.StringType]
+res: 200 player-name=Miles [uk.emarte.regurgitator.core.StringType]
      or
      400 parameter not found
 ```
@@ -91,8 +91,8 @@ if the ``name`` query param is omitted, all parameters are listed in the respons
 
 ```
 req: GET /
-res: 200 player-name=Miles [com.emarte.regurgitator.core.StringType]
-         player-score=1000 [com.emarte.regurgitator.core.NumberType]
+res: 200 player-name=Miles [uk.emarte.regurgitator.core.StringType]
+         player-score=1000 [uk.emarte.regurgitator.core.NumberType]
 ```
 
 #### set parameter
@@ -136,7 +136,7 @@ below is an example web.xml for mapping all incoming http requests to ``Regurgit
 
     <servlet>
         <servlet-name>RegurgitatorServlet</servlet-name>
-        <servlet-class>com.emarte.regurgitator.extensions.web.RegurgitatorServlet</servlet-class>
+        <servlet-class>uk.emarte.regurgitator.extensions.web.RegurgitatorServlet</servlet-class>
         <init-param>
             <param-name>config-location</param-name>
             <param-value>classpath:/config.xml</param-value>

@@ -2,27 +2,27 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.*;
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import uk.emarte.regurgitator.core.*;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import static com.emarte.regurgitator.core.CoreTypes.STRING;
-import static com.emarte.regurgitator.core.Log.getLog;
-import static com.emarte.regurgitator.core.StringType.stringify;
-import static com.emarte.regurgitator.extensions.web.CookieUtil.cookieToString;
-import static com.emarte.regurgitator.extensions.web.CookieUtil.stringToCookie;
-import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 import static java.lang.String.valueOf;
+import static uk.emarte.regurgitator.core.CoreTypes.STRING;
+import static uk.emarte.regurgitator.core.Log.getLog;
+import static uk.emarte.regurgitator.core.StringType.stringify;
+import static uk.emarte.regurgitator.extensions.web.CookieUtil.cookieToString;
+import static uk.emarte.regurgitator.extensions.web.CookieUtil.stringToCookie;
+import static uk.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 class HttpMessageProxy {
     private static final Log log = getLog(HttpMessageProxy.class);

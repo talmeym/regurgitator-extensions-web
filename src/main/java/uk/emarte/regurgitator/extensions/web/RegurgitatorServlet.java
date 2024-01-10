@@ -2,9 +2,9 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.*;
+import uk.emarte.regurgitator.core.*;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -14,12 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.emarte.regurgitator.core.ConfigurationFile.loadFile;
-import static com.emarte.regurgitator.core.Log.getLog;
-import static com.emarte.regurgitator.core.StringType.stringify;
-import static com.emarte.regurgitator.extensions.web.HttpGlobalUtil.applyGlobalData;
-import static com.emarte.regurgitator.extensions.web.HttpRequestUtil.applyRequestData;
-import static com.emarte.regurgitator.extensions.web.HttpResponseUtil.applyResponseData;
+import static uk.emarte.regurgitator.core.ConfigurationFile.loadFile;
+import static uk.emarte.regurgitator.core.Log.getLog;
+import static uk.emarte.regurgitator.core.StringType.stringify;
+import static uk.emarte.regurgitator.extensions.web.HttpGlobalUtil.applyGlobalData;
+import static uk.emarte.regurgitator.extensions.web.HttpRequestUtil.applyRequestData;
+import static uk.emarte.regurgitator.extensions.web.HttpResponseUtil.applyResponseData;
 
 public class RegurgitatorServlet extends HttpServlet implements HasId {
     private final Log log = getLog(this);
