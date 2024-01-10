@@ -2,13 +2,13 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.*;
+import uk.emarte.regurgitator.core.*;
 
 import java.util.List;
 
-import static com.emarte.regurgitator.core.Log.getLog;
+import static uk.emarte.regurgitator.core.Log.getLog;
 
 public class HttpCall extends Container<Step> implements Step {
     private final Log log = getLog(this);

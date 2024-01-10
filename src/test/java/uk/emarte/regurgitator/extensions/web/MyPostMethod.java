@@ -2,11 +2,11 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.auth.AuthState;
-import org.apache.commons.httpclient.methods.PutMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("deprecation")
-class MyPutMethod extends PutMethod {
+class MyPostMethod extends PostMethod {
     private final String name;
     private String path;
     private RequestEntity requestEntity;
@@ -30,7 +30,7 @@ class MyPutMethod extends PutMethod {
 
     private final UnsupportedOperationException exception = new UnsupportedOperationException("not implemented");
 
-    public MyPutMethod(String name, String responseBody, Map<String, String> responseHeaders, int statusCode) {
+    public MyPostMethod(String name, String responseBody, Map<String, String> responseHeaders, int statusCode) {
         this.name = name;
         this.responseBody = responseBody;
         this.responseHeaders = responseHeaders;

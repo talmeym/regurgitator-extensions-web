@@ -2,22 +2,27 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.auth.AuthState;
+import org.apache.commons.httpclient.methods.PutMethod;
+import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
-@SuppressWarnings({"deprecation"})
-class MyHttpMethod implements HttpMethod {
+@SuppressWarnings("deprecation")
+class MyPutMethod extends PutMethod {
     private final String name;
     private String path;
-    private final Map<String, String> requestHeaders = new TreeMap<String, String>();
+    private RequestEntity requestEntity;
+    private final Map<String, String> requestHeaders = new HashMap<String, String>();
     private final String responseBody;
     private final Map<String, String> responseHeaders;
     private final int statusCode;
@@ -25,11 +30,16 @@ class MyHttpMethod implements HttpMethod {
 
     private final UnsupportedOperationException exception = new UnsupportedOperationException("not implemented");
 
-    public MyHttpMethod(String name, String responseBody, Map<String, String> responseHeaders, int statusCode) {
+    public MyPutMethod(String name, String responseBody, Map<String, String> responseHeaders, int statusCode) {
         this.name = name;
         this.responseBody = responseBody;
         this.responseHeaders = responseHeaders;
         this.statusCode = statusCode;
+    }
+
+    @Override
+    public void setRequestEntity(RequestEntity requestEntity) {
+        this.requestEntity = requestEntity;
     }
 
     @Override
@@ -105,16 +115,6 @@ class MyHttpMethod implements HttpMethod {
     @Override
     public void removeRequestHeader(Header header) {
         requestHeaders.remove(header.getName());
-    }
-
-    @Override
-    public boolean getFollowRedirects() {
-        throw exception;
-    }
-
-    @Override
-    public void setFollowRedirects(boolean followRedirects) {
-        throw exception;
     }
 
     @Override
@@ -280,7 +280,23 @@ class MyHttpMethod implements HttpMethod {
 
     @Override
     public String toString() {
+        return name + "[" + path + (requestEntity != null ? ",request-body=" + toStringRequestEntity() : "") + ",request-headers=" + requestHeaders + ",response-headers=" + responseHeaders + ",connection-released=" + connectionReleased + "]";
+    }
 
-        return name + "[" + path + ",request-headers=" + requestHeaders + ",response-headers=" + responseHeaders + ",connection-released=" + connectionReleased + "]";
+    private String toStringRequestEntity() {
+        try {
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            requestEntity.writeRequest(output);
+            String result = output.toString();
+            String contentType = requestEntity.getContentType();
+
+            if(contentType != null) {
+                result = contentType + ":" + result;
+            }
+
+            return result;
+        } catch (IOException e) {
+            return null;
+        }
     }
 }

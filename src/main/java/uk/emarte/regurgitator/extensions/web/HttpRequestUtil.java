@@ -2,10 +2,10 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.Log;
-import com.emarte.regurgitator.core.Message;
+import uk.emarte.regurgitator.core.Log;
+import uk.emarte.regurgitator.core.Message;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -14,11 +14,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 
-import static com.emarte.regurgitator.core.CoreTypes.NUMBER;
-import static com.emarte.regurgitator.core.CoreTypes.STRING;
-import static com.emarte.regurgitator.core.Log.getLog;
-import static com.emarte.regurgitator.extensions.web.CookieUtil.httpCookieToString;
-import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
+import static uk.emarte.regurgitator.core.CoreTypes.NUMBER;
+import static uk.emarte.regurgitator.core.CoreTypes.STRING;
+import static uk.emarte.regurgitator.core.Log.getLog;
+import static uk.emarte.regurgitator.extensions.web.CookieUtil.httpCookieToString;
+import static uk.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 class HttpRequestUtil {
     private static final Log log = getLog(HttpRequestUtil.class);
