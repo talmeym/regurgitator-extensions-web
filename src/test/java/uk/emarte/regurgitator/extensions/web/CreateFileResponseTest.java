@@ -2,14 +2,14 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.*;
 import org.junit.Test;
+import uk.emarte.regurgitator.core.*;
 
-import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.RESPONSE_METADATA_CONTEXT;
-import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.STATUS_CODE;
 import static org.junit.Assert.assertEquals;
+import static uk.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.RESPONSE_METADATA_CONTEXT;
+import static uk.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.STATUS_CODE;
 
 public class CreateFileResponseTest {
     private final CreateFileResponse toTest = new CreateFileResponse("id", new ValueSource(new ContextLocation("file-path"), null), null);

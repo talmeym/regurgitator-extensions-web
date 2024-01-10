@@ -2,17 +2,17 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.Log;
-import com.emarte.regurgitator.core.Message;
-import com.emarte.regurgitator.core.ValueProcessor;
+import uk.emarte.regurgitator.core.Log;
+import uk.emarte.regurgitator.core.Message;
+import uk.emarte.regurgitator.core.ValueProcessor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.emarte.regurgitator.core.Log.getLog;
-import static com.emarte.regurgitator.core.StringType.stringify;
+import static uk.emarte.regurgitator.core.Log.getLog;
+import static uk.emarte.regurgitator.core.StringType.stringify;
 
 public class QueryParamProcessor implements ValueProcessor {
     private static final Log log = getLog(QueryParamProcessor.class);

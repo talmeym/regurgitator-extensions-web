@@ -2,7 +2,7 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
 public interface ExtensionsWebConfigConstants {
     String REQUEST_PAYLOAD_CONTEXT = "request-payload";

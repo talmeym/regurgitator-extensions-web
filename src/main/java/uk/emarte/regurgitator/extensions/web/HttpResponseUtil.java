@@ -2,19 +2,19 @@
  * Copyright (C) 2017 Miles Talmey.
  * Distributed under the MIT License (license terms are at http://opensource.org/licenses/MIT).
  */
-package com.emarte.regurgitator.extensions.web;
+package uk.emarte.regurgitator.extensions.web;
 
-import com.emarte.regurgitator.core.Log;
-import com.emarte.regurgitator.core.Message;
-import com.emarte.regurgitator.core.Parameters;
-import com.emarte.regurgitator.core.RegurgitatorException;
+import uk.emarte.regurgitator.core.Log;
+import uk.emarte.regurgitator.core.Message;
+import uk.emarte.regurgitator.core.Parameters;
+import uk.emarte.regurgitator.core.RegurgitatorException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import static com.emarte.regurgitator.core.Log.getLog;
-import static com.emarte.regurgitator.core.StringType.stringify;
-import static com.emarte.regurgitator.extensions.web.CookieUtil.stringToHttpCookie;
-import static com.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
+import static uk.emarte.regurgitator.core.Log.getLog;
+import static uk.emarte.regurgitator.core.StringType.stringify;
+import static uk.emarte.regurgitator.extensions.web.CookieUtil.stringToHttpCookie;
+import static uk.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
 class HttpResponseUtil {
     private static final Log log = getLog(HttpResponseUtil.class);
