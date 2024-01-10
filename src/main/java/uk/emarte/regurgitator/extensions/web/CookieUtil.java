@@ -4,17 +4,17 @@
  */
 package uk.emarte.regurgitator.extensions.web;
 
-import uk.emarte.regurgitator.core.RegurgitatorException;
 import org.apache.commons.httpclient.Cookie;
+import uk.emarte.regurgitator.core.RegurgitatorException;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static uk.emarte.regurgitator.core.StringType.stringify;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
+import static uk.emarte.regurgitator.core.StringType.stringify;
 
 class CookieUtil {
     private static final String PATTERN = "domain={0};name={1};value={2};path={3};expiryDate={4};secure={5};comment={6};version={7};";

@@ -4,20 +4,20 @@
  */
 package uk.emarte.regurgitator.extensions.web;
 
-import uk.emarte.regurgitator.core.Log;
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.methods.DeleteMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
+import uk.emarte.regurgitator.core.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static uk.emarte.regurgitator.core.Log.getLog;
 import static java.util.Arrays.asList;
 import static org.apache.commons.httpclient.auth.AuthScope.ANY;
+import static uk.emarte.regurgitator.core.Log.getLog;
 
 class HttpClientWrapper {
     private static final Log log = getLog(HttpClientWrapper.class);

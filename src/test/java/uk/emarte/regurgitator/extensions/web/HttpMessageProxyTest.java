@@ -13,7 +13,10 @@ import uk.emarte.regurgitator.core.Message;
 import uk.emarte.regurgitator.core.RegurgitatorException;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import static java.util.Arrays.asList;
 import static junit.framework.Assert.assertEquals;

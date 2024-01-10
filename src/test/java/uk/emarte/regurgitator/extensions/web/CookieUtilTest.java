@@ -4,13 +4,13 @@
  */
 package uk.emarte.regurgitator.extensions.web;
 
-import uk.emarte.regurgitator.core.RegurgitatorException;
 import org.apache.commons.httpclient.Cookie;
 import org.junit.Test;
+import uk.emarte.regurgitator.core.RegurgitatorException;
 
+import static org.junit.Assert.*;
 import static uk.emarte.regurgitator.extensions.web.CookieUtil.cookieToString;
 import static uk.emarte.regurgitator.extensions.web.CookieUtil.stringToCookie;
-import static org.junit.Assert.*;
 
 public class CookieUtilTest {
 
