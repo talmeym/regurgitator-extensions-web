@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Properties;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static uk.emarte.regurgitator.core.FileUtil.getInputStreamForFile;
 import static uk.emarte.regurgitator.extensions.web.HttpGlobalUtil.addGlobalParametersFromProperties;
 

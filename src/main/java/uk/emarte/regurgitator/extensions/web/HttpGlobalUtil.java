@@ -15,7 +15,7 @@ import static uk.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants
 
 class HttpGlobalUtil {
     private static final Log log = getLog(HttpGlobalUtil.class);
-    private static final Map<String, Parameter> GLOBAL_PARAMETERS = new HashMap<String, Parameter>();
+    private static final Map<String, Parameter> GLOBAL_PARAMETERS = new HashMap<>();
 
     static void setGlobalParameter(String name, ParameterType<?> type, Object value) {
         log.debug("Setting global parameter '{}'", name);
@@ -40,8 +40,8 @@ class HttpGlobalUtil {
     @SuppressWarnings("unchecked")
     static void addGlobalParametersFromProperties(String location, Properties properties) throws RegurgitatorException {
         log.debug("Loading global parameters from '{}'", location);
-        HashMap<String, String> values = new HashMap<String, String>();
-        HashMap<String, ParameterType<?>> types = new HashMap<String, ParameterType<?>>();
+        HashMap<String, String> values = new HashMap<>();
+        HashMap<String, ParameterType<?>> types = new HashMap<>();
 
         for(Enumeration<String> enumeration = (Enumeration<String>) properties.propertyNames(); enumeration.hasMoreElements(); ) {
             String entry = enumeration.nextElement();

@@ -115,6 +115,6 @@ class HttpRequestUtil {
             output.write(buffer, 0, bytesRead);
         }
 
-        return new String(output.toByteArray());
+        return output.toString();
     }
 }

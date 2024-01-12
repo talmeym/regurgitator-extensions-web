@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import static java.util.Arrays.asList;
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static uk.emarte.regurgitator.core.CoreTypes.STRING;
 import static uk.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.*;
 
@@ -29,7 +29,7 @@ public class HttpMessageProxyTest {
 
     @Test
     public void testDefaults() throws RegurgitatorException {
-        CollectingHttpClientWrapper wrapper = getWrapper(new ArrayList<String>());
+        CollectingHttpClientWrapper wrapper = getWrapper(new ArrayList<>());
         HttpMessageProxy toTest = new HttpMessageProxy(wrapper);
         Message response = toTest.proxyMessage(new Message(null));
         assertEquals("GET[null,request-headers={},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
@@ -38,7 +38,7 @@ public class HttpMessageProxyTest {
 
     @Test
     public void testDefaultsPost() throws RegurgitatorException {
-        CollectingHttpClientWrapper wrapper = getWrapper(new ArrayList<String>());
+        CollectingHttpClientWrapper wrapper = getWrapper(new ArrayList<>());
         HttpMessageProxy toTest = new HttpMessageProxy(wrapper);
         Message response = toTest.proxyMessage(buildDefaultPostMessage());
         assertEquals("POST[null,request-headers={},response-headers={rsh1=rsv1, rsh2=rsv2},connection-released=true]", wrapper.toString());
@@ -78,7 +78,7 @@ public class HttpMessageProxyTest {
     }
 
     private CollectingHttpClientWrapper getWrapper(List<String> cookieNames) {
-        TreeMap<String, String> responseHeaders = new TreeMap<String, String>();
+        TreeMap<String, String> responseHeaders = new TreeMap<>();
         responseHeaders.put("rsh1", "rsv1");
         responseHeaders.put("rsh2", "rsv2");
         return new CollectingHttpClientWrapper("response body", responseHeaders, 200, cookieNames);
@@ -107,7 +107,7 @@ public class HttpMessageProxyTest {
         return message;
     }
 
-    private class CollectingHttpClientWrapper extends HttpClientWrapper {
+    private static class CollectingHttpClientWrapper extends HttpClientWrapper {
         private final String responseBody;
         private final Map<String, String> responseHeaders;
         private final int statusCode;

@@ -7,7 +7,7 @@ package uk.emarte.regurgitator.extensions.web;
 import org.junit.Test;
 import uk.emarte.regurgitator.core.*;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static uk.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.RESPONSE_METADATA_CONTEXT;
 import static uk.emarte.regurgitator.extensions.web.ExtensionsWebConfigConstants.STATUS_CODE;
 
@@ -66,7 +66,7 @@ public class CreateFileResponseTest {
         assertEquals("assets file value", callback.getValue());
     }
 
-    private class CollectingResponseCallBack implements ResponseCallBack {
+    private static class CollectingResponseCallBack implements ResponseCallBack {
         private Object value;
 
         @Override

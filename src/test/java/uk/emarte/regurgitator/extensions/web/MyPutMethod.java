@@ -22,7 +22,7 @@ class MyPutMethod extends PutMethod {
     private final String name;
     private String path;
     private RequestEntity requestEntity;
-    private final Map<String, String> requestHeaders = new HashMap<String, String>();
+    private final Map<String, String> requestHeaders = new HashMap<>();
     private final String responseBody;
     private final Map<String, String> responseHeaders;
     private final int statusCode;
