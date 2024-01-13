@@ -2,7 +2,7 @@
 
 regurgitator is a lightweight, modular, extendable java framework that you configure to 'regurgitate' canned or clever responses to incoming requests; useful for quickly mocking or prototyping services without writing any code. simply configure, deploy and run.
 
-start your reading here: [regurgitator-all](http://github.com/talmeym/regurgitator-all#regurgitator)
+start your reading here: [regurgitator-all](https://talmeym.github.io/regurgitator-all#regurgitator)
 
 ## regurgitator over http
 
@@ -154,13 +154,13 @@ below is an example web.xml for mapping all incoming http requests to ``Regurgit
 ## steps
 
 regurgitator-extensions-web provides the following steps:
-- ``http-call`` ([xml](https://github.com/talmeym/regurgitator-extensions-web-xml#http-call), [json](https://github.com/talmeym/regurgitator-extensions-web-json#http-call), [yml](https://github.com/talmeym/regurgitator-extensions-web-yml#http-call)) make an outward http call, using parameter values for payload, request metadata, headers etc.
-- ``create-http-response`` ([xml](https://github.com/talmeym/regurgitator-extensions-web-xml#create-http-response), [json](https://github.com/talmeym/regurgitator-extensions-web-json#create-http-response), [yml](https://github.com/talmeym/regurgitator-extensions-web-yml#create-http-response)) create a response, pre-populating parameters for content-type and status code
-- ``create-file-response`` ([xml](https://github.com/talmeym/regurgitator-extensions-web-xml#create-file-response), [json](https://github.com/talmeym/regurgitator-extensions-web-json#create-file-response), [yml](https://github.com/talmeym/regurgitator-extensions-web-yml#create-file-response)) create a response containing the contents of a file named in a parameter
+- ``http-call`` ([xml](https://talmeym.github.io/regurgitator-extensions-web-xml#http-call), [json](https://talmeym.github.io/regurgitator-extensions-web-json#http-call), [yml](https://talmeym.github.io/regurgitator-extensions-web-yml#http-call)) make an outward http call, using parameter values for payload, request metadata, headers etc.
+- ``create-http-response`` ([xml](https://talmeym.github.io/regurgitator-extensions-web-xml#create-http-response), [json](https://talmeym.github.io/regurgitator-extensions-web-json#create-http-response), [yml](https://talmeym.github.io/regurgitator-extensions-web-yml#create-http-response)) create a response, pre-populating parameters for content-type and status code
+- ``create-file-response`` ([xml](https://talmeym.github.io/regurgitator-extensions-web-xml#create-file-response), [json](https://talmeym.github.io/regurgitator-extensions-web-json#create-file-response), [yml](https://talmeym.github.io/regurgitator-extensions-web-yml#create-file-response)) create a response containing the contents of a file named in a parameter
 
 ## constructs
 
 regurgitator-extensions-web provides the following constructs:
 #### value processors
-- ``query-param-processor`` ([xml](https://github.com/talmeym/regurgitator-extensions-web-xml#query-param-processor), [json](https://github.com/talmeym/regurgitator-extensions-web-json#query-param-processor), [yml](https://github.com/talmeym/regurgitator-extensions-web-yml#query-param-processor)) process a parameter value, extracting values from it using a query param format
+- ``query-param-processor`` ([xml](https://talmeym.github.io/regurgitator-extensions-web-xml#query-param-processor), [json](https://talmeym.github.io/regurgitator-extensions-web-json#query-param-processor), [yml](https://talmeym.github.io/regurgitator-extensions-web-yml#query-param-processor)) process a parameter value, extracting values from it using a query param format
 
