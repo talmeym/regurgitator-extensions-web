@@ -106,16 +106,6 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>github</id>
-            <distributionManagement>
-                <repository>
-                    <id>internal.repo</id>
-                    <name>Temporary Staging Repository</name>
-                    <url>file:///tmp/regurgitator-mvn-repo</url>
-                </repository>
-            </distributionManagement>
-        </profile>
     </profiles>
 
     <dependencies>
