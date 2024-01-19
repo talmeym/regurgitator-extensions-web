@@ -123,7 +123,7 @@ req: DELETE /
 res: 200 removed [number of parameters] parameters
 ```
 
-### example web.xml
+### tomcat
 
 below is an example web.xml for mapping all incoming http requests to ``RegurgitatorServlet`` using tomcat
 
@@ -151,7 +151,9 @@ below is an example web.xml for mapping all incoming http requests to ``Regurgit
 </web-app>
 ```
 
-alternatively you can use [``jetty``](https://github.com/talmeym/regurgitator-extensions-jetty){:target="_blank"} to run both ``RegurgitatorServlet`` and ``GlobalMetadataServlet`` as a standalone app, for packaging as a dockerized deployable
+## jetty
+
+alternatively you can use [``jetty``](https://github.com/talmeym/regurgitator-extensions-jetty){:target="_blank"} to run both ``RegurgitatorServlet`` and ``GlobalMetadataServlet`` as a standalone app, for packaging as a dockerized deployable. instructions on how this can be done are within the readme files of our reference projects [here](https://talmeym.github.io/regurgitator-all#reference-projects)
 
 ## steps
 
