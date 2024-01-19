@@ -153,7 +153,7 @@ below is an example web.xml for mapping all incoming http requests to ``Regurgit
 
 ## jetty
 
-as an alternative to running regurgitator via its servlets in tomcat, you can use [``regurgitator-extensions-jetty``](https://github.com/talmeym/regurgitator-extensions-jetty){:target="_blank"} to run both ``RegurgitatorServlet`` and ``GlobalMetadataServlet`` as a standalone app, for packaging as a dockerized deployable. instructions on how this can be done are within the readme files of our reference projects [here](https://talmeym.github.io/regurgitator-all#reference-projects)
+as an alternative to running regurgitator in tomcat, you can use [``regurgitator-extensions-jetty``](https://github.com/talmeym/regurgitator-extensions-jetty){:target="_blank"} to run both ``RegurgitatorServlet`` and ``GlobalMetadataServlet`` as a standalone app, for packaging as a dockerized deployable. instructions on how this can be done are within the readme files of our reference projects [here](https://talmeym.github.io/regurgitator-all#reference-projects)
 
 ## steps
 
