@@ -125,7 +125,7 @@ res: 200 removed [number of parameters] parameters
 
 ### example web.xml
 
-below is an example web.xml for mapping all incoming http requests to ``RegurgitatorServlet``
+below is an example web.xml for mapping all incoming http requests to ``RegurgitatorServlet`` using tomcat
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -150,6 +150,8 @@ below is an example web.xml for mapping all incoming http requests to ``Regurgit
     </servlet-mapping>
 </web-app>
 ```
+
+alternatively you can use [``jetty``](https://github.com/talmeym/regurgitator-extensions-jetty){:target="_blank"} to run both ``RegurgitatorServlet`` and ``GlobalMetadataServlet`` as a standalone app, for packaging as a dockerized deployable
 
 ## steps
 
