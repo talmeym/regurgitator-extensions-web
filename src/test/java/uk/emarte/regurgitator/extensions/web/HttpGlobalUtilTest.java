@@ -19,7 +19,7 @@ import static uk.emarte.regurgitator.extensions.web.HttpGlobalUtil.addGlobalPara
 
 public class HttpGlobalUtilTest {
     @Test
-    public void testThis() throws Exception {
+    public void testUtil() throws Exception {
         String propertiesLocation = "classpath:/global.properties";
         Properties properties = new Properties();
         properties.load(getInputStreamForFile(propertiesLocation));

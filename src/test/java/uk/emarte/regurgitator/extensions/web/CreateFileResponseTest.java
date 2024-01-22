@@ -17,7 +17,7 @@ public class CreateFileResponseTest {
     private final CreateFileResponse prefixToTest = new CreateFileResponse("id", new ValueSource(new ContextLocation("file-path"), null), "/assets/");
 
     @Test
-    public void testThis() throws RegurgitatorException {
+    public void testStep() throws RegurgitatorException {
         CollectingResponseCallBack callback = new CollectingResponseCallBack();
         Message message = new Message(callback);
 
