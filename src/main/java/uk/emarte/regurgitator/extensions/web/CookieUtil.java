@@ -67,7 +67,7 @@ class CookieUtil {
 
             return cookie;
         } catch (ParseException e) {
-            throw new RegurgitatorException("boom");
+            throw new RegurgitatorException("boom"); // TODO error handling ??
         }
     }
 
