@@ -4,7 +4,6 @@
  */
 package uk.emarte.regurgitator.extensions.web;
 
-import uk.emarte.regurgitator.core.CoreTypes;
 import uk.emarte.regurgitator.core.Parameter;
 import uk.emarte.regurgitator.core.ParameterType;
 import uk.emarte.regurgitator.core.RegurgitatorException;
@@ -19,6 +18,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import static uk.emarte.regurgitator.core.CoreConfigConstants.*;
+import static uk.emarte.regurgitator.core.CoreTypes.STRING;
 import static uk.emarte.regurgitator.core.EntityLookup.parameterType;
 import static uk.emarte.regurgitator.core.FileUtil.getInputStreamForFile;
 import static uk.emarte.regurgitator.extensions.web.HttpGlobalUtil.*;
@@ -102,7 +102,7 @@ public class GlobalMetadataServlet extends HttpServlet {
         }
 
         try {
-            ParameterType<?> parameterType = type != null ? parameterType(type) : CoreTypes.STRING;
+            ParameterType<?> parameterType = type != null ? parameterType(type) : STRING;
             setGlobalParameter(name, parameterType, value);
             sendMessage("parameter set", resp);
         } catch (RegurgitatorException e) {
