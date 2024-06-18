@@ -6,6 +6,7 @@ package uk.emarte.regurgitator.extensions.web;
 
 import uk.emarte.regurgitator.core.Log;
 import uk.emarte.regurgitator.core.Message;
+import uk.emarte.regurgitator.core.RegurgitatorException;
 import uk.emarte.regurgitator.core.ValueProcessor;
 
 import java.util.ArrayList;
@@ -24,19 +25,29 @@ public class QueryParamProcessor implements ValueProcessor {
     }
 
     @Override
-    public Object process(Object value, Message message) {
-        List<String> results = new ArrayList<>();
+    public Object process(Object value, Message message) throws RegurgitatorException {
+        if(value != null) {
+            String valueStr = stringify(value);
+            List<String> results = new ArrayList<>();
 
-        for(String part: stringify(value).split("&")) {
-            String[] split = part.split("=");
+            if(valueStr.contains("=")) {
+                for (String part : valueStr.split("&")) {
+                    String[] split = part.split("=");
 
-            if(split[0].equals(key)) {
-                results.add(split[1]);
+                    if (split[0].equals(key)) {
+                        results.add(split[1]);
+                    }
+                }
+
+                String result = results.size() > 0 ? stringify(results) : null;
+                log.debug((result != null ? "Found '" : "Did not find '") + "key {}' in query string '{}'", key, results);
+                return result;
             }
+
+            throw new RegurgitatorException("Value is not a query string");
         }
 
-        String result = results.size() > 0 ? stringify(results) : null;
-        log.debug((result != null ? "Found '" : "Did not find '") + "{}' in query string '{}'", key, results);
-        return result;
+        log.warn("No value to process");
+        return null;
     }
 }
