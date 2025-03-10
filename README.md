@@ -4,8 +4,6 @@ regurgitator is a lightweight, modular, extendable java framework that you confi
 
 start your reading here: [regurgitator-all](https://talmeym.github.io/regurgitator-all#regurgitator)
 
-[``apidocs``](https://regurgitator.emarte.uk/apidocs/regurgitator-extensions-web/0.1.2/)
-
 ## regurgitator over http
 
 regurgitator allows the mocking of http services, using the following deployable servlets:
@@ -169,4 +167,6 @@ regurgitator-extensions-web provides the following steps:
 regurgitator-extensions-web provides the following constructs:
 #### value processors
 - ``query-param-processor`` ([xml](https://talmeym.github.io/regurgitator-extensions-web-xml#query-param-processor), [json](https://talmeym.github.io/regurgitator-extensions-web-json#query-param-processor), [yml](https://talmeym.github.io/regurgitator-extensions-web-yml#query-param-processor)) process a parameter value, extracting values from it using a query param format
+
+[``apidocs``](https://regurgitator.emarte.uk/apidocs/regurgitator-extensions-web/0.1.3/){:target="_blank"}
 
